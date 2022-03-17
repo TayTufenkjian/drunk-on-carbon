@@ -1,3 +1,4 @@
+import json
 import requests
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -14,20 +15,28 @@ def index(request):
             "Authorization": f"Bearer {CLIMATIQ_API_KEY}"
           }
     body = {
-            "emission_factor": "electricity-energy_source_grid_mix",
+            "emission_factor": "consumer_goods-type_clothing",
             "parameters":
                 {
-                "energy": 4200,
-                "energy_unit": "kWh"
+                "money": 10,
+                "money_unit": "usd"
                 }
         }
     
     response = requests.post(api_url, json=body, headers=headers)
-    response_json = response.json()
     response_status = response.status_code
+    dict = response.json()
+    
+    # Check unit of measurement in the response
 
+    # Round down the co2e units
+    wine_bottles = int(dict["co2e"])
+
+    # Get the range to pass to the template
+    wine_bottle_range = range(0, wine_bottles)
 
     return render(request, "index.html", {
-        "response_json": response_json,
-        "response_status": response_status
+        "response_status": response_status,
+        "dict": dict,
+        "wine_bottle_range": wine_bottle_range
         })
