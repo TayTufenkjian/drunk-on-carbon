@@ -36,12 +36,11 @@ def estimate(request, miles):
 def estimate_car_travel(miles):
     # Request body    
     body = {
-            "emission_factor": "passenger_vehicle-vehicle_type_car-fuel_source_na-engine_size_na-vehicle_age_na-vehicle_weight_na",
-            "parameters":
-                {
-                "distance": miles,
-                "distance_unit": "mi"
-                }
+        "emission_factor": "passenger_vehicle-vehicle_type_car-fuel_source_na-engine_size_na-vehicle_age_na-vehicle_weight_na",
+        "parameters": {
+            "distance": miles,
+            "distance_unit": "mi"
+        }
     }
 
     return request_kg(body)
@@ -50,20 +49,19 @@ def estimate_car_travel(miles):
 def estimate_rail_travel(miles):
     # Request body assumes one passenger    
     body = {
-            "emission_factor": "passenger_train-route_type_intercity-fuel_source_na",
-            "parameters":
-                {
-                "passengers": 1,
-                "distance": miles,
-                "distance_unit": "mi"
-                }
+        "emission_factor": "passenger_train-route_type_intercity-fuel_source_na",
+        "parameters": {
+            "passengers": 1,
+            "distance": miles,
+            "distance_unit": "mi"
+        }
     }
 
     return request_kg(body)
 
 
 def estimate_air_travel(miles):
-    
+
     # Length of the flight determines the emission factor
     if miles >= 2300:
         # Long-haul flight
@@ -79,13 +77,12 @@ def estimate_air_travel(miles):
 
     # Request body assumes one passenger   
     body = {
-            "emission_factor": emission_factor,
-            "parameters":
-                {
-                "passengers": 1,
-                "distance": miles,
-                "distance_unit": "mi"
-                }
+        "emission_factor": emission_factor,
+        "parameters": {
+            "passengers": 1,
+            "distance": miles,
+            "distance_unit": "mi"
+        }
     }
 
     return request_kg(body)
