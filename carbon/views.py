@@ -34,7 +34,6 @@ def estimate(request, miles):
 
 
 def estimate_car_travel(miles):
-
     # Request body    
     body = {
             "emission_factor": "passenger_vehicle-vehicle_type_car-fuel_source_na-engine_size_na-vehicle_age_na-vehicle_weight_na",
@@ -45,18 +44,10 @@ def estimate_car_travel(miles):
                 }
     }
 
-    # Send the POST request to Climatiq and store the response object
-    response = requests.post(api_url, json=body, headers=headers)
-
-    # Convert the response object to a dictionary
-    dict = response.json()
-
-    # Return kg of co2e
-    return dict["co2e"]
+    return request_kg(body)
 
 
 def estimate_rail_travel(miles):
-    
     # Request body assumes one passenger    
     body = {
             "emission_factor": "passenger_train-route_type_intercity-fuel_source_na",
@@ -68,18 +59,11 @@ def estimate_rail_travel(miles):
                 }
     }
 
-    # Send the POST request to Climatiq and store the response object
-    response = requests.post(api_url, json=body, headers=headers)
-
-    # Convert the response object to a dictionary
-    dict = response.json()
-
-    # Return kg of co2e
-    return dict["co2e"]
+    return request_kg(body)
 
 
 def estimate_air_travel(miles):
-
+    
     # Length of the flight determines the emission factor
     if miles >= 2300:
         # Long-haul flight
@@ -104,6 +88,10 @@ def estimate_air_travel(miles):
                 }
     }
 
+    return request_kg(body)
+
+
+def request_kg(body):
     # Send the POST request to Climatiq and store the response object
     response = requests.post(api_url, json=body, headers=headers)
 
