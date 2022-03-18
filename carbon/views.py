@@ -1,42 +1,38 @@
 import json
 import requests
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 import os
 from dotenv import load_dotenv
 load_dotenv()
 
+# Get the Climatiq API key from the environment variables
 CLIMATIQ_API_KEY= str(os.getenv("CLIMATIQ_API_KEY"))
 
+
 def index(request):
+    return render(request, "index.html")
+
+
+def estimate(request, miles):
     api_url = "https://beta3.api.climatiq.io/estimate"
     headers = {
             "Authorization": f"Bearer {CLIMATIQ_API_KEY}"
-          }
+    }
+
+    # Request body for car travel      
     body = {
-            "emission_factor": "consumer_goods-type_clothing",
+            "emission_factor": "passenger_vehicle-vehicle_type_car-fuel_source_na-engine_size_na-vehicle_age_na-vehicle_weight_na",
             "parameters":
                 {
-                "money": 10,
-                "money_unit": "usd"
+                "distance": miles,
+                "distance_unit": "mi"
                 }
-        }
+    }
     
+    # Send the POST request to Climatiq and store the response object
     response = requests.post(api_url, json=body, headers=headers)
-    response_status = response.status_code
-    dict = response.json()
-    
-    # Check unit of measurement in the response
 
-    # Round down the co2e units
-    wine_bottles = int(dict["co2e"])
-
-    # Get the range to pass to the template
-    wine_bottle_range = range(0, wine_bottles)
-
-    return render(request, "index.html", {
-        "response_status": response_status,
-        "dict": dict,
-        "wine_bottle_range": wine_bottle_range
-        })
+    # Return the text of the response (which is already JSON encoded)
+    return HttpResponse(response.text)
