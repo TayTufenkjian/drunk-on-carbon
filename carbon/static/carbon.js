@@ -3,6 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Listen for the submission of the miles estimate form
     document.querySelector('#miles-estimate').onsubmit = () => {
 
+        // Clear any previous estimates
+        estimates_div = document.querySelector('#estimates');
+        estimates_div.innerHTML = '';
+
         // Get the number of miles from the form
         let miles = document.querySelector('#miles').value;
         
@@ -13,14 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
             mode: 'same-origin'
         })
         .then(response => response.json())
-        .then(result => {
+        .then(estimates => {
             // Print result
-            console.log(result);
+            console.log(estimates);
 
-            // Update the page to display the co2e kg estimate
-            const div = document.createElement('div');
-            div.innerHTML = `${result.co2e} ${result.co2e_unit}`;
-            document.querySelector('.container').append(div);
+            // Update the page to display the co2e kg estimates
+            estimates_div.innerHTML = `<div>Car: ${estimates.car} kg</div><div>Rail: ${estimates.rail} kg</div><div>Air: ${estimates.air} kg</div>`;
         })
 
         // Stop form from submitting
