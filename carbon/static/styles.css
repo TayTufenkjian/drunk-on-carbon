@@ -5,3 +5,16 @@
 .bottles, .estimate, .estimate img {
     margin: 1rem 0;
 }
+
+#estimate-description {
+    margin: 2rem 0;
+}
+
+.estimate h3 {
+    text-align: center;
+}
+
+#site-name a,  #site-name:hover {
+    color: #212529;
+    text-decoration: none;
+}

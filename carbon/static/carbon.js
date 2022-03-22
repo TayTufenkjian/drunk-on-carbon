@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    // Hide description
+    document.querySelector('#estimate-description').style.display = 'none';
+
     // Listen for the submission of the miles estimate form
     document.querySelector('#miles-estimate').onsubmit = () => {
 
@@ -20,9 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(estimates => {
 
             // For each mode of travel, create a div containing kg estimate and wine bottle images
-            car_div = wine_bottles("car", estimates.car);
-            rail_div = wine_bottles("rail", estimates.rail);
-            air_div = wine_bottles("air", estimates.air);
+            car_div = wine_bottles("Car", estimates.car);
+            rail_div = wine_bottles("Rail", estimates.rail);
+            air_div = wine_bottles("Air", estimates.air);
+
+            // Show description 
+            document.querySelector('#estimate-description').style.display = 'block';
 
             // Update the page to display all estimates
             estimates_div.append(car_div, rail_div, air_div);
@@ -50,8 +56,8 @@ function wine_bottles(travel_mode, kg) {
     // Create a parent div containing the kg estimate and the images
     div = document.createElement('div');
     div.id = `${travel_mode}`;
-    div.classList.add('estimate');
-    div.innerHTML = `<div class="text">${kg} kg of greenhouse gases emitted traveling by ${travel_mode}</div>`;
+    div.classList.add('estimate', 'col');
+    div.innerHTML = `<h3 class="text">${travel_mode} - ${kg} kg</h3>`;
     div.append(bottles);
 
     return div;
