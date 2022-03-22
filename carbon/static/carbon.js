@@ -22,16 +22,24 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(estimates => {
 
-            // For each mode of travel, create a div containing kg estimate and wine bottle images
-            car_div = wine_bottles("Car", estimates.car);
-            rail_div = wine_bottles("Rail", estimates.rail);
-            air_div = wine_bottles("Air", estimates.air);
+            // For each mode of travel, get the object containing kg estimate and wine bottle images
+            car = wine_bottles("Car", estimates.car);
+            rail = wine_bottles("Rail", estimates.rail);
+            air = wine_bottles("Air", estimates.air);
 
             // Show description 
             document.querySelector('#estimate-description').style.display = 'block';
 
             // Update the page to display all estimates
-            estimates_div.append(car_div, rail_div, air_div);
+            travel_modes = document.createElement('div');
+            travel_modes.classList.add('travel-modes', 'row');
+            travel_modes.append(car.text, rail.text, air.text);
+
+            all_bottles = document.createElement('div');
+            all_bottles.classList.add('all-bottles', 'row');
+            all_bottles.append(car.bottles, rail.bottles, air.bottles);
+
+            estimates_div.append(travel_modes, all_bottles);
         })
 
         // Stop form from submitting
@@ -43,24 +51,24 @@ document.addEventListener('DOMContentLoaded', function() {
 function wine_bottles(travel_mode, kg) {
 
     // Create a div to hold the wine bottle images
-    bottles = document.createElement('div');
-    bottles.classList.add('bottles');
+    let bottles = document.createElement('div');
+    bottles.classList.add('bottles', 'col');
 
     // Append the relevant number of wine bottle images
     for (let i = 0; i < kg; i++) {
-        wine_bottle = document.createElement('img');
+        let wine_bottle = document.createElement('img');
         wine_bottle.src = 'static/images/wine-bottle.svg';
         bottles.append(wine_bottle);
     }
 
     // Create a parent div containing the kg estimate and the images
-    div = document.createElement('div');
-    div.id = `${travel_mode}`;
-    div.classList.add('estimate', 'col');
-    div.innerHTML = `<h3 class="text">${travel_mode} - ${kg} kg</h3>`;
-    div.append(bottles);
+    let text = document.createElement('div');
+    text.id = `${travel_mode}`;
+    text.classList.add('col');
+    text.innerHTML = `<h3>${travel_mode} - ${kg} kg</h3>`;
 
-    return div;
+    // Return an object containing the estimate text and bottle images
+    return {'text': text, 'bottles': bottles};
 };
 
 

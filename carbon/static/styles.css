@@ -2,15 +2,20 @@
     margin-top: 3rem;
 }
 
-.bottles, .estimate, .estimate img {
+.all-bottles, .travel-modes, .all-bottles img {
     margin: 1rem 0;
+}
+
+.all-bottles {
+	overflow-y: scroll;
+	height: 600px;
 }
 
 #estimate-description {
     margin: 2rem 0;
 }
 
-.estimate h3 {
+.travel-modes h3 {
     text-align: center;
 }
 
