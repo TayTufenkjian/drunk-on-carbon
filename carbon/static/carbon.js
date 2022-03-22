@@ -18,17 +18,43 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(estimates => {
-            // Print result
-            console.log(estimates);
 
-            // Update the page to display the co2e kg estimates
-            estimates_div.innerHTML = `<div>Car: ${estimates.car} kg</div><div>Rail: ${estimates.rail} kg</div><div>Air: ${estimates.air} kg</div>`;
+            // For each mode of travel, create a div containing kg estimate and wine bottle images
+            car_div = wine_bottles("Car", estimates.car);
+            rail_div = wine_bottles("Rail", estimates.rail);
+            air_div = wine_bottles("Air", estimates.air);
+
+            // Update the page to display all estimates
+            estimates_div.append(car_div, rail_div, air_div);
         })
 
         // Stop form from submitting
         return false;
     }
 });
+
+
+function wine_bottles(travel_mode, kg) {
+
+    // Create a div to hold the wine bottle images
+    bottles = document.createElement('div');
+    bottles.classList.add('bottles');
+
+    // Append the relevant number of wine bottle images
+    for (let i = 0; i < kg; i++) {
+        wine_bottle = document.createElement('img');
+        wine_bottle.src = 'static/images/wine-bottle-icon.svg';
+        bottles.append(wine_bottle);
+    }
+
+    // Create a parent div containing the kg estimate and the images
+    div = document.createElement('div');
+    div.id = `${travel_mode}`;
+    div.innerHTML = `<div class="text">${travel_mode}: ${kg} kg</div>`;
+    div.append(bottles);
+
+    return div;
+};
 
 
 // Get the CSRF token
