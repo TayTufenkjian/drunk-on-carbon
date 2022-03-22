@@ -20,6 +20,14 @@ def index(request):
     return render(request, "index.html")
 
 
+def usa_simple(request):
+    return render(request, "usa_simple.html")
+
+
+def usa_advanced(request):
+    return render(request, "usa_advanced.html")
+
+
 def estimate(request, miles):
 
     # Get co2e estimates for each type of travel and store them in a dictionary

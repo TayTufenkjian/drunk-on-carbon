@@ -2,16 +2,6 @@
 {% load static %}
 
 {% block body %}
-    <h1>Drunk on Carbon</h1>
-
-    <p>Travel in the United States</p>
-
-    <form id="miles-estimate">
-        <label for="miles">Number of miles: </label>
-        <input type="number" name="miles" id="miles">
-        <input type="submit" class="btn btn-primary" value="Estimate">
-    </form>    
-    
-    <div id="estimates">
-    </div>
+    <a href="{% url 'usa_simple' %}"><p>USA travel - simple</p></a>
+    <a href="{% url 'usa_advanced' %}"><p>USA travel - advanced</p></a>
 {% endblock %}
