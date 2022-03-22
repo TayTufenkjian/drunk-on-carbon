@@ -1,5 +1,6 @@
 from email.message import EmailMessage
 import json
+import math
 import requests
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -103,5 +104,5 @@ def request_kg(body):
     # Convert the response object to a dictionary
     dict = response.json()
 
-    # Return kg of co2e
-    return dict["co2e"]
+    # Return kg of co2e, rounded up to the nearest integer
+    return math.ceil(dict["co2e"])
