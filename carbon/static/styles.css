@@ -1,0 +1,7 @@
+.container {
+    margin-top: 3rem;
+}
+
+.bottles, .estimate, .estimate img {
+    margin: 1rem 0;
+}
