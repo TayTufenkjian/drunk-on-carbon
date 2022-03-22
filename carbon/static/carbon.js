@@ -43,14 +43,14 @@ function wine_bottles(travel_mode, kg) {
     // Append the relevant number of wine bottle images
     for (let i = 0; i < kg; i++) {
         wine_bottle = document.createElement('img');
-        wine_bottle.src = 'static/images/wine-bottle-icon.svg';
+        wine_bottle.src = 'static/images/wine-bottle.svg';
         bottles.append(wine_bottle);
     }
 
     // Create a parent div containing the kg estimate and the images
     div = document.createElement('div');
     div.id = `${travel_mode}`;
-    div.innerHTML = `<div class="text">${travel_mode}: ${kg} kg</div>`;
+    div.innerHTML = `<div class="text">${kg} kg of greenhouse gases emitted traveling by ${travel_mode}</div>`;
     div.append(bottles);
 
     return div;
