@@ -15,11 +15,6 @@ CLIMATIQ_API_KEY= str(os.getenv("CLIMATIQ_API_KEY"))
 GOOGLE_MAPS_API_KEY = str(os.getenv("GOOGLE_MAPS_API_KEY"))
 
 
-# Set URL and headers for calls to the Climatiq API
-api_url = "https://beta3.api.climatiq.io/estimate"
-headers = {"Authorization": f"Bearer {CLIMATIQ_API_KEY}"}
-
-
 def index(request):
     return render(request, "index.html")
 
@@ -101,9 +96,13 @@ def estimate_air_travel(miles):
 
 
 def request_kg(body):
-    
+
+    # Set URL and headers
+    url = "https://beta3.api.climatiq.io/estimate"
+    headers = {"Authorization": f"Bearer {CLIMATIQ_API_KEY}"}
+
     # Send the POST request to Climatiq and store the response object
-    response = requests.post(api_url, json=body, headers=headers)
+    response = requests.post(url, json=body, headers=headers)
 
     # Convert the response object to a dictionary
     dict = response.json()
