@@ -9,5 +9,6 @@ urlpatterns = [
     path("usa_advanced", views.usa_advanced, name="usa_advanced"),
 
     # API Routes
-    path("estimate/<int:miles>", views.estimate, name="estimate")
+    path("estimate/<int:miles>", views.estimate, name="estimate"),
+    path("request_distance/<str:origin>&<str:destination>", views.request_distance, name="request_distance")
 ]

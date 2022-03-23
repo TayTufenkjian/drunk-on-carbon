@@ -2,5 +2,16 @@
 {% load static %}
 
 {% block body %}
-    <p>Placeholder for a form that talks to the Google Maps Distance Matrix API</p>
+    <form id="place" class="estimate-form">
+        <label for="origin">Origin</label>
+        <input type="text" name="origin" id="origin">
+        <label for="destination">Destination</label>
+        <input type="text" name="destination" id="destination">
+        <input type="submit" class="btn btn-primary" value="Estimate">
+    </form>
+
+    <h2 id="estimate-description">CO2e emitted when traveling by... </h2>
+
+    <div id="estimates">
+    </div>
 {% endblock %}

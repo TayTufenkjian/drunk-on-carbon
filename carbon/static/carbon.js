@@ -3,49 +3,75 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hide description
     document.querySelector('#estimate-description').style.display = 'none';
 
-    // Listen for the submission of the miles estimate form
-    document.querySelector('#miles-estimate').onsubmit = () => {
+    // Listen for the submission of the estimate forms
+    document.querySelector('.estimate-form').onsubmit = () => {
 
         // Clear any previous estimates
         estimates_div = document.querySelector('#estimates');
         estimates_div.innerHTML = '';
 
-        // Get the number of miles from the form
-        let miles = document.querySelector('#miles').value;
+        // Get the distance in miles
+        let miles = 0;
+
+        // If using the simple form, use that input as the number of miles
+        if (document.querySelector('#miles') !== null )
+        {
+            miles = document.querySelector('#miles').value;
+            show_estimates(miles);
+        } else {
+            // If using the advanced form, request the distance from Google Maps
+            origin = document.querySelector('#origin').value;
+            destination = document.querySelector('#destination').value;
+
+            fetch(`/request_distance/${origin}&${destination}`, {
+                method: 'POST',
+                headers: {'X-CSRFToken': csrftoken},
+                mode: 'same-origin'
+            })
+            .then(response => response.json())
+            .then(distance => {
+                miles = distance.miles;
+                show_estimates(miles);
+            })
+        }
         
-        // Send the number of miles to Climatiq for estimation, via views.py
-        fetch(`/estimate/${miles}`, {
-            method: 'POST',
-            headers: {'X-CSRFToken': csrftoken},
-            mode: 'same-origin'
-        })
-        .then(response => response.json())
-        .then(estimates => {
-
-            // For each mode of travel, get the object containing kg estimate and wine bottle images
-            car = wine_bottles("Car", estimates.car);
-            rail = wine_bottles("Rail", estimates.rail);
-            air = wine_bottles("Air", estimates.air);
-
-            // Show description 
-            document.querySelector('#estimate-description').style.display = 'block';
-
-            // Update the page to display all estimates
-            travel_modes = document.createElement('div');
-            travel_modes.classList.add('travel-modes', 'row');
-            travel_modes.append(car.text, rail.text, air.text);
-
-            all_bottles = document.createElement('div');
-            all_bottles.classList.add('all-bottles', 'row');
-            all_bottles.append(car.bottles, rail.bottles, air.bottles);
-
-            estimates_div.append(travel_modes, all_bottles);
-        })
-
         // Stop form from submitting
         return false;
     }
 });
+
+
+function show_estimates(miles) {
+
+    // Send the number of miles to Climatiq for estimation, via views.py
+    fetch(`/estimate/${miles}`, {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(estimates => {
+
+        // For each mode of travel, get the object containing kg estimate and wine bottle images
+        car = wine_bottles("Car", estimates.car);
+        rail = wine_bottles("Rail", estimates.rail);
+        air = wine_bottles("Air", estimates.air);
+
+        // Show description 
+        document.querySelector('#estimate-description').style.display = 'block';
+
+        // Update the page to display all estimates
+        travel_modes = document.createElement('div');
+        travel_modes.classList.add('travel-modes', 'row');
+        travel_modes.append(car.text, rail.text, air.text);
+
+        all_bottles = document.createElement('div');
+        all_bottles.classList.add('all-bottles', 'row');
+        all_bottles.append(car.bottles, rail.bottles, air.bottles);
+
+        estimates_div.append(travel_modes, all_bottles);
+    })
+}
 
 
 function wine_bottles(travel_mode, kg) {
