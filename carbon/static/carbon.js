@@ -10,9 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         estimates_div = document.querySelector('#estimates');
         estimates_div.innerHTML = '';
 
-        // Get the distance in miles
-        let miles = 0;
-
+        // Display the estimates for the given number of miles
         // If using the simple form, use that input as the number of miles
         if (document.querySelector('#miles') !== null )
         {
@@ -87,7 +85,7 @@ function wine_bottles(travel_mode, kg) {
         bottles.append(wine_bottle);
     }
 
-    // Create a parent div containing the kg estimate and the images
+    // Create a div containing the kg estimate text
     let text = document.createElement('div');
     text.id = `${travel_mode}`;
     text.classList.add('col');
