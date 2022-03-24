@@ -1,17 +1,16 @@
 {% extends 'layout.html' %}
+{% include 'estimate.html' %}
 {% load static %}
 
 {% block body %}
-    <form id="place" class="estimate-form">
+    <form class="estimate-form">
         <label for="origin">Origin</label>
         <input type="text" name="origin" id="origin" placeholder="Miami, FL">
         <label for="destination">Destination</label>
         <input type="text" name="destination" id="destination" placeholder="San Francisco, CA">
         <input type="submit" class="btn btn-primary" value="Estimate">
     </form>
-
-    <h2 id="estimate-description">CO2e emitted when traveling by... </h2>
-
-    <div id="estimates">
-    </div>
+    
+    {% include 'estimate.html' %}
+    
 {% endblock %}
