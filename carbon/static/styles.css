@@ -1,5 +1,6 @@
 .container {
     margin-top: 3rem;
+    max-width: 960px;
 }
 
 .all-bottles, .travel-modes, .all-bottles img {
