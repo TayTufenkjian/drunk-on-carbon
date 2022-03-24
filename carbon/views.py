@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 
-from .models import User
+from .models import SavedEstimate, User
 
 import os
 from dotenv import load_dotenv
@@ -213,3 +213,24 @@ def request_place_id(input_encoded):
 
     # Return the Place ID
     return(dict["candidates"][0]["place_id"])
+
+
+def save_estimate(request, miles, origin='', destination=''):
+    
+    # Save the estimate for the current user
+    saved_estimate = SavedEstimate()
+    saved_estimate.user = request.user
+    saved_estimate.miles = miles
+    saved_estimate.origin = origin
+    saved_estimate.destination = destination
+    saved_estimate.save()
+
+    # Return to index
+    return index(request)
+
+
+def saved_estimates_view(request):
+    saved_estimates = request.user.saved_estimates.all()
+    return render(request, "saved_estimates.html", {
+        "saved_estimates": saved_estimates
+    })

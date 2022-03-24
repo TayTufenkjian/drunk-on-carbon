@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block body %}
+    {% for estimate in saved_estimates %}
+    <div>
+        User: {{ estimate.user }}
+        Miles: {{ estimate.miles }}
+        Origin: {{ estimate.origin }}
+        Destination: {{ estimate.destination }}
+    </div>
+    {% endfor %}
+{% endblock %}

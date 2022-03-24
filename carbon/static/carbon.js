@@ -16,12 +16,16 @@ document.addEventListener('DOMContentLoaded', function() {
             estimates_div = document.querySelector('#estimates');
             estimates_div.innerHTML = '';
 
-            // Display the estimates for the given number of miles
             // If using the simple form, use that input as the number of miles
             if (document.querySelector('#miles') !== null)
             {
+                // Get the miles and display the relevant estimates
                 miles = document.querySelector('#miles').value;
                 show_estimates(miles);
+
+                // Display the link to save the estimate
+                show_save_link(miles);
+
             } else {
                 // If using the advanced form, request the distance from Google Maps
                 origin = document.querySelector('#origin').value;
@@ -34,8 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .then(response => response.json())
                 .then(distance => {
+
+                    // Get the miles and display the relevant estimates
                     miles = distance.miles;
                     show_estimates(miles);
+
+                    // Display the link to save the estimate
+                    show_save_link(`${miles}&${origin}&${destination}`);
                 })
             }
             
@@ -105,6 +114,13 @@ function wine_bottles(travel_mode, kg) {
     return {'text': text, 'bottles': bottles};
 };
 
+function show_save_link(params) {
+    // Create and display the link to save an estimate
+    save_estimate = document.createElement('a');
+    save_estimate.innerHTML = 'Save this estimate';
+    save_estimate.href = `/save_estimate/${params}`;
+    document.querySelector('#save').append(save_estimate);
+}
 
 // Get the CSRF token
 // Copied and pasted from the Django documentation https://docs.djangoproject.com/en/4.0/ref/csrf/
