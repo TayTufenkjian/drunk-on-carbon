@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Listen for the submission of the estimate forms
     document.querySelector('.estimate-form').onsubmit = () => {
 
+        // Disable the submit button to prevent duplicate form submissions
+        document.querySelector('.btn').disabled = true;
+
         // Clear any previous estimates
         estimates_div = document.querySelector('#estimates');
         estimates_div.innerHTML = '';
@@ -33,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         }
         
-        // Stop form from submitting
+        // Stop form from actually submitting
         return false;
     }
 });
@@ -68,6 +71,9 @@ function show_estimates(miles) {
         all_bottles.append(car.bottles, rail.bottles, air.bottles);
 
         estimates_div.append(travel_modes, all_bottles);
+
+        // Re-enable the form submit button
+        document.querySelector('.btn').disabled = false;
     })
 }
 

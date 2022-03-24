@@ -1,10 +1,14 @@
-from email.message import EmailMessage
 import json
 import math
 import requests
 import urllib.parse
-from django.http import HttpResponse, JsonResponse
+from django.contrib.auth import authenticate, login, logout
+from django.db import IntegrityError
+from django.urls import reverse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+
+from .models import User
 
 import os
 from dotenv import load_dotenv
@@ -18,13 +22,71 @@ GOOGLE_MAPS_API_KEY = str(os.getenv("GOOGLE_MAPS_API_KEY"))
 def index(request):
     return render(request, "index.html")
 
-
 def usa_simple(request):
     return render(request, "usa_simple.html")
 
-
 def usa_advanced(request):
     return render(request, "usa_advanced.html")
+
+
+def create_account(request):
+
+    # If request is POST, create the user account
+    if request.method == "POST":
+        username = request.POST["username"]
+        email = request.POST["email"]
+
+        # Ensure password matches confirmation
+        password = request.POST["password"]
+        confirmation = request.POST["confirmation"]
+        if password != confirmation:
+            return render(request, "create_account.html", {
+                "message": "Passwords must match. Please check your password and confirmation password, then try again."
+            })
+
+        # Attempt to create new user
+        try:
+            user = User.objects.create_user(username, email, password)
+            user.save()
+        except IntegrityError:
+            return render(request, "create_account.html", {
+                "message": "This username is not available. Please enter a different username and try again."
+            })
+        login(request, user)
+        return HttpResponseRedirect(reverse("index"))
+
+    # If request is GET, load the page for creating a user account
+    else:
+        return render(request, "create_account.html")
+
+
+def login_view(request):
+    
+    # If request is POST, log the user in
+    if request.method == "POST":
+
+        # Attempt to sign user in
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+
+        # Check if authentication successful
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse("index"))
+        else:
+            return render(request, "login.html", {
+                "message": "Invalid username and/or password."
+            })
+
+    # If the request is GET, load the login page
+    else:
+        return render(request, "login.html")
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("index"))
 
 
 def estimate(request, miles):
