@@ -15,6 +15,10 @@
     margin: 2rem 0;
 }
 
+form input {
+    margin-bottom: 1rem;
+}
+
 .travel-modes h3 {
     text-align: center;
 }
