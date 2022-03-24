@@ -19,7 +19,7 @@
     text-align: center;
 }
 
-#site-name a,  #site-name:hover {
+.navbar-brand, .navbar-brand:hover {
     color: #212529;
     text-decoration: none;
 }
