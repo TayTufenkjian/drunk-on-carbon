@@ -1,43 +1,47 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Hide description
-    document.querySelector('#estimate-description').style.display = 'none';
+    // If there is an estimate form on the page
+    if (document.querySelector('.estimate-form') !== null)
+    {
+        // Hide description
+        document.querySelector('#estimate-description').style.display = 'none';
 
-    // Listen for the submission of the estimate forms
-    document.querySelector('.estimate-form').onsubmit = () => {
+        // Listen for the submission of the estimate forms
+        document.querySelector('.estimate-form').onsubmit = () => {
 
-        // Disable the submit button to prevent duplicate form submissions
-        document.querySelector('.btn').disabled = true;
+            // Disable the submit button to prevent duplicate form submissions
+            document.querySelector('.btn').disabled = true;
 
-        // Clear any previous estimates
-        estimates_div = document.querySelector('#estimates');
-        estimates_div.innerHTML = '';
+            // Clear any previous estimates
+            estimates_div = document.querySelector('#estimates');
+            estimates_div.innerHTML = '';
 
-        // Display the estimates for the given number of miles
-        // If using the simple form, use that input as the number of miles
-        if (document.querySelector('#miles') !== null )
-        {
-            miles = document.querySelector('#miles').value;
-            show_estimates(miles);
-        } else {
-            // If using the advanced form, request the distance from Google Maps
-            origin = document.querySelector('#origin').value;
-            destination = document.querySelector('#destination').value;
-
-            fetch(`/request_distance/${origin}&${destination}`, {
-                method: 'POST',
-                headers: {'X-CSRFToken': csrftoken},
-                mode: 'same-origin'
-            })
-            .then(response => response.json())
-            .then(distance => {
-                miles = distance.miles;
+            // Display the estimates for the given number of miles
+            // If using the simple form, use that input as the number of miles
+            if (document.querySelector('#miles') !== null)
+            {
+                miles = document.querySelector('#miles').value;
                 show_estimates(miles);
-            })
+            } else {
+                // If using the advanced form, request the distance from Google Maps
+                origin = document.querySelector('#origin').value;
+                destination = document.querySelector('#destination').value;
+
+                fetch(`/request_distance/${origin}&${destination}`, {
+                    method: 'POST',
+                    headers: {'X-CSRFToken': csrftoken},
+                    mode: 'same-origin'
+                })
+                .then(response => response.json())
+                .then(distance => {
+                    miles = distance.miles;
+                    show_estimates(miles);
+                })
+            }
+            
+            // Stop form from actually submitting
+            return false;
         }
-        
-        // Stop form from actually submitting
-        return false;
     }
 });
 
