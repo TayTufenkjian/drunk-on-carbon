@@ -28,3 +28,13 @@ form input {
     color: #212529;
     text-decoration: none;
 }
+
+.saved-estimate {
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.saved-estimate:last-of-type {
+    border-bottom: 1px solid black;
+}

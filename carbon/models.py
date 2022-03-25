@@ -11,3 +11,4 @@ class SavedEstimate(models.Model):
     miles = models.IntegerField()
     origin = models.TextField(max_length=500, default='')
     destination = models.TextField(max_length=500, default='')
+    timestamp = models.DateTimeField(auto_now_add=True)
