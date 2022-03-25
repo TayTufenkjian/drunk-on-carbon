@@ -22,9 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Get the miles and display the relevant estimates
                 miles = document.querySelector('#miles').value;
                 show_estimates(miles);
-
-                // Display the link to save the estimate
-                show_save_link(miles);
+                show_save_link(miles); // Display the link to save the estimate
+                
 
             } else {
                 // If using the advanced form, request the distance from Google Maps
@@ -42,9 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Get the miles and display the relevant estimates
                     miles = distance.miles;
                     show_estimates(miles);
-
-                    // Display the link to save the estimate
-                    show_save_link(`${miles}&${origin}&${destination}`);
+                    show_save_link(`${miles}&${origin}&${destination}`); // Display the link to save the estimate
                 })
             }
             
@@ -87,6 +84,9 @@ function show_estimates(miles) {
 
         // Re-enable the form submit button
         document.querySelector('.btn').disabled = false;
+
+        // Return the promise that the show_save_link function is waiting for
+        return new Promise((resolve, reject)=>{resolve()});
     })
 }
 
@@ -114,13 +114,19 @@ function wine_bottles(travel_mode, kg) {
     return {'text': text, 'bottles': bottles};
 };
 
-function show_save_link(params) {
+
+async function show_save_link(params) {
+
+    // Wait for the estimates and wine bottles to display on the page
+    await show_estimates(miles);
+
     // Create and display the link to save an estimate
     save_estimate = document.createElement('a');
     save_estimate.innerHTML = 'Save this estimate';
     save_estimate.href = `/save_estimate/${params}`;
     document.querySelector('#save').append(save_estimate);
 }
+
 
 // Get the CSRF token
 // Copied and pasted from the Django documentation https://docs.djangoproject.com/en/4.0/ref/csrf/
