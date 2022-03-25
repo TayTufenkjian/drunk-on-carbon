@@ -225,8 +225,8 @@ def save_estimate(request, miles, origin='', destination=''):
     saved_estimate.destination = destination
     saved_estimate.save()
 
-    # Load the user's saved estimates page
-    return saved_estimates_view(request)
+    # Redirect to the user's saved estimates page
+    return HttpResponseRedirect(reverse("saved_estimates_view"))
 
 
 def saved_estimates_view(request):

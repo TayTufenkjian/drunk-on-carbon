@@ -5,7 +5,6 @@
     <h2>Your saved estimates</h2>
     {% for estimate in saved_estimates %}
     <div class="saved-estimate">
-        <div>Timestamp: {{ estimate.timestamp }}</div>
         <div>Miles: {{ estimate.miles }}</div>
         {% if estimate.origin %}
             <div>Origin: {{ estimate.origin }}</div>
