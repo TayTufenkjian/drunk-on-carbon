@@ -5,10 +5,10 @@
     <h2>Your saved estimates</h2>
     {% for estimate in saved_estimates %}
     <div class="saved-estimate">
-        <div>Miles: {{ estimate.miles }}</div>
         {% if estimate.origin %}
-            <div>Origin: {{ estimate.origin }}</div>
-            <div>Destination: {{ estimate.destination }}</div>
+            <div>{{ estimate.origin }} to {{ estimate.destination }}</div>
+        {% else %}
+            <div>{{ estimate.miles }} Miles</div>
         {% endif %}
     </div>
     {% endfor %}
