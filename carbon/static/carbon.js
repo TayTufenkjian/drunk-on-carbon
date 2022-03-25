@@ -141,7 +141,7 @@ async function show_save_link(params) {
     save_estimate = document.createElement('a');
     save_estimate.innerHTML = 'Save this estimate';
     save_estimate.href = `/save_estimate/${params}`;
-    document.querySelector('#save').append(save_estimate);
+    document.querySelector('#options').append(save_estimate);
 
     // Re-enable the form submit button
     document.querySelector('.btn').disabled = false;
@@ -156,7 +156,7 @@ async function show_saved_estimates_link() {
     all_estimates = document.createElement('a');
     all_estimates.innerHTML = 'All saved estimates';
     all_estimates.href = '/saved_estimates';
-    document.querySelector('#save').append(all_estimates);
+    document.querySelector('#options').append(all_estimates);
 }
 
 
