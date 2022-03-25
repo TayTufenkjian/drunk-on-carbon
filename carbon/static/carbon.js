@@ -13,8 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.btn').disabled = true;
 
             // Clear any previous estimates
-            estimates_div = document.querySelector('#estimates');
-            estimates_div.innerHTML = '';
+            document.querySelector('#estimates').innerHTML = '';
 
             // If using the simple form, use that input as the number of miles
             if (document.querySelector('#miles') !== null)
@@ -49,6 +48,27 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
     }
+
+    // If there are saved estimates on the page
+    if (document.querySelector('.saved-estimate') !== null)
+    {
+        // Hide description
+        document.querySelector('#estimate-description').style.display = 'none';
+
+        // Listen for a click on the saved estimates
+        document.querySelectorAll('.saved-estimate').forEach(item => {
+            item.addEventListener('click', event => {
+                // Hide all the saved estimates
+                document.querySelector('#saved-estimates').style.display = 'none';
+
+                // Display the relevant estimate with wine bottles
+                show_estimates(item.querySelector('#miles').value);
+
+                // Display the link for all saved estimates
+                show_saved_estimates_link();
+            })
+        })       
+    }
 });
 
 
@@ -80,12 +100,9 @@ function show_estimates(miles) {
         all_bottles.classList.add('all-bottles', 'row');
         all_bottles.append(car.bottles, rail.bottles, air.bottles);
 
-        estimates_div.append(travel_modes, all_bottles);
+        document.querySelector('#estimates').append(travel_modes, all_bottles);
 
-        // Re-enable the form submit button
-        document.querySelector('.btn').disabled = false;
-
-        // Return the promise that the show_save_link function is waiting for
+        // Return the promise that the show links functions are waiting for
         return new Promise((resolve, reject)=>{resolve()});
     })
 }
@@ -125,6 +142,21 @@ async function show_save_link(params) {
     save_estimate.innerHTML = 'Save this estimate';
     save_estimate.href = `/save_estimate/${params}`;
     document.querySelector('#save').append(save_estimate);
+
+    // Re-enable the form submit button
+    document.querySelector('.btn').disabled = false;
+}
+
+
+async function show_saved_estimates_link() {
+    // Wait for the estimates and wine bottles to display on the page
+    await show_estimates(miles);
+
+    // Create and display the link to see all the saved estimates
+    all_estimates = document.createElement('a');
+    all_estimates.innerHTML = 'All saved estimates';
+    all_estimates.href = '/saved_estimates';
+    document.querySelector('#save').append(all_estimates);
 }
 
 

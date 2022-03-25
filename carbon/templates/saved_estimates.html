@@ -2,14 +2,21 @@
 {% load static %}
 
 {% block body %}
-    <h2>Your saved estimates</h2>
-    {% for estimate in saved_estimates %}
-    <div class="saved-estimate">
-        {% if estimate.origin %}
-            <div>{{ estimate.origin }} to {{ estimate.destination }}</div>
-        {% else %}
-            <div>{{ estimate.miles }} Miles</div>
-        {% endif %}
+    <div id="saved-estimates">
+        <h2>Your saved estimates</h2>
+
+        {% for estimate in saved_estimates %}
+        <div class="saved-estimate">
+            {% if estimate.origin %}
+                <div>{{ estimate.origin }} to {{ estimate.destination }}</div>
+            {% else %}
+                <div>{{ estimate.miles }} Miles</div>
+            {% endif %}
+            <input type="hidden" id="miles" value="{{ estimate.miles }}">
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+
+    {% include 'estimate.html' %}
+
 {% endblock %}
