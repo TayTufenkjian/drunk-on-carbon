@@ -225,8 +225,8 @@ def save_estimate(request, miles, origin='', destination=''):
     saved_estimate.destination = destination
     saved_estimate.save()
 
-    # Return to index
-    return index(request)
+    # Load the user's saved estimates page
+    return saved_estimates_view(request)
 
 
 def saved_estimates_view(request):
