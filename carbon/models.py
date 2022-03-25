@@ -8,6 +8,6 @@ class User(AbstractUser):
 
 class SavedEstimate(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="saved_estimates")
-    miles = models.IntegerField
+    miles = models.IntegerField()
     origin = models.TextField(max_length=500, default='')
     destination = models.TextField(max_length=500, default='')
