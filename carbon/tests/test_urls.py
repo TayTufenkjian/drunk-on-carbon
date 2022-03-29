@@ -1,3 +1,4 @@
+
 from django.test import Client, TestCase
 
 def test_page_load(url):
@@ -9,6 +10,7 @@ def test_page_load(url):
 
     # Check that the status code is 200
     assert response.status_code == 200
+
 
 class PageLoadTestCase(TestCase):
 
@@ -25,4 +27,17 @@ class PageLoadTestCase(TestCase):
     def test_advanced_page(self):
         """USA advanced estimate page loads"""
         url = "/usa_advanced"
+        test_page_load(url)
+
+
+class APIRouteTestCase(TestCase):
+
+    def test_estimate(self):
+        """Passing miles integer to the estimate route returns a successful response"""
+        url = "/estimate/10"
+        test_page_load(url)
+    
+    def test_request_distance(self):
+        """Passing origin and destination strings returns a successful response"""
+        url = "/request_distance/MiamiFL&SanFranciscoCA"
         test_page_load(url)
