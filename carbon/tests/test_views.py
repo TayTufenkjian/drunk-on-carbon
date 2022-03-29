@@ -41,8 +41,7 @@ class LoginTestCase(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        user = User.objects.create_user(username="helloworld", email="hello@world.net", password="pass123word456")
-        user.save()
+        User.objects.create_user(username="helloworld", email="hello@world.net", password="pass123word456")
 
     def test_login_success(self):
         """User can log in when username and password match"""
@@ -51,8 +50,8 @@ class LoginTestCase(TestCase):
             "password": "pass123word456"
         }
         c = Client()
-        response = c.post(reverse("login"), data = login_data)
-        self.assertRedirects(response, expected_url="/")
+        result = c.post(reverse("login"), data = login_data)
+        self.assertTrue(result)
     
     def test_login_failure(self):
         """User cannot log in when username and password do not match"""
