@@ -62,3 +62,18 @@ class LoginTestCase(TestCase):
         c = Client()
         response = c.post(reverse("login"), data = login_data)
         assert response.context["message"] == "Invalid username and/or password."
+
+
+class LogoutTestCase(TestCase):
+
+    def test_logout(self):
+        """User can log out"""
+        login_data = {
+            "username": "helloworld", 
+            "password": "pass123word456"
+        }
+        c = Client()
+        login_result = c.post(reverse("login"), data = login_data)
+        self.assertTrue(login_result)
+        logout_result = c.get(reverse("logout"))
+        self.assertTrue(logout_result)
