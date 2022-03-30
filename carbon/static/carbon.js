@@ -75,11 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function show_estimates(miles) {
 
     // Send the number of miles to Climatiq for estimation, via views.py
-    fetch(`/estimate/${miles}`, {
-        method: 'POST',
-        headers: {'X-CSRFToken': csrftoken},
-        mode: 'same-origin'
-    })
+    fetch(`/estimate/${miles}`)
     .then(response => response.json())
     .then(estimates => {
 
@@ -132,10 +128,7 @@ function wine_bottles(travel_mode, kg) {
 };
 
 
-async function show_save_link(params) {
-
-    // Wait for the estimates and wine bottles to display on the page
-    await show_estimates(miles);
+function show_save_link(params) {
 
     // Create and display the link to save an estimate
     save_estimate = document.createElement('a');
@@ -148,9 +141,7 @@ async function show_save_link(params) {
 }
 
 
-async function show_saved_estimates_link() {
-    // Wait for the estimates and wine bottles to display on the page
-    await show_estimates(miles);
+function show_saved_estimates_link() {
 
     // Create and display the link to see all the saved estimates
     all_estimates = document.createElement('a');
