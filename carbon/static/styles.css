@@ -7,11 +7,6 @@
     margin: 1rem 0;
 }
 
-.all-bottles {
-	overflow-y: scroll;
-	height: 600px;
-}
-
 #estimate-description {
     margin: 2rem 0;
 }
