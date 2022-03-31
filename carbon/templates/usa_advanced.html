@@ -2,39 +2,36 @@
 {% load static %}
 
 {% block body %}
+    <h2>USA Travel</h2>
+    <hr>
     <form class="estimate-form">
-
-        <div id="origin" class="mb-5">
-            <h2>From</h2>
-            <div class="mb-3">
+        <div id="origin" class="row mb-3">
+            <h3>From</h3>
+            <div class="col">
                 <label for="origin_city" class="form-label">City</label>
-                <input type="text" class="form-control" name="origin_city" id="origin_city" placeholder="Miami">
+                <input type="text" class="form-control" name="origin_city" id="origin_city">
             </div>
-            <div class="mb-3">
+            <div class="col">
                 <label for="origin_state" class="form-label">State</label>
-                <select class="form-control" name="origin_state" id="origin_state">
+                <select class="form-select" name="origin_state" id="origin_state">
                     {% include 'usa_states.html' %}
                 </select>
             </div>
         </div>
-
-        <div id="destination" class="mb-5">
-            <h2>To</h2>
-            <div class="mb-3">
+        <div id="destination" class="row mb-3">
+            <h3>To</h3>
+            <div class="col">
                 <label for="destination_city" class="form-label">City</label>
-                <input type="text" class="form-control" name="destination_city" id="destination_city" placeholder="San Francisco">
+                <input type="text" class="form-control" name="destination_city" id="destination_city">
             </div>
-
-            <div class="mb-3">
+            <div class="col">
                 <label for="destination_state" class="form-label">State</label>
-                <select class="form-control" name="destination_state" id="destination_state">
+                <select class="form-select" name="destination_state" id="destination_state">
                     {% include 'usa_states.html' %}
                 </select>
             </div>
         </div>
-
         <input type="submit" class="btn btn-primary" value="Estimate">
-
     </form>
     
     {% include 'estimate.html' %}
