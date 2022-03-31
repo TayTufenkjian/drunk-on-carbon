@@ -98,18 +98,29 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function show_inputs(miles, origin_address='', destination_address='') {
+
+    // Select the div that will contain the inputs
+    from_to_div = document.querySelector('#from-to');
+
+    // Create and populate the miles header
     miles_header = document.createElement('h3');
     miles_header.innerHTML = `${miles} miles`;
 
+    // Create and populate the "from" section
     from = document.createElement('div');
     from.innerHTML = `from: ${origin_address}`;
 
+    // Create and populate the "to" section
     to = document.createElement('div');
     to.innerHTML = `to: ${destination_address}`;
 
-    from_to_div = document.querySelector('#from-to');
-
-    from_to_div.append(miles_header, from, to);
+    // Populate the inputs section depending on the inputs submitted
+    if (origin_address == '')
+    {
+        from_to_div.append(miles_header);
+    } else {
+        from_to_div.append(miles_header, from, to);
+    }
 }
 
 
