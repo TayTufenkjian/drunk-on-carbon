@@ -26,8 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
             } else {
                 // If using the advanced form, request the distance from Google Maps
-                origin = document.querySelector('#origin').value;
-                destination = document.querySelector('#destination').value;
+                origin_city = document.querySelector('#origin_city').value;
+                origin_state = document.querySelector('#origin_state').value;
+                destination_city = document.querySelector('#destination_city').value;
+                destination_state = document.querySelector('#destination_state').value;
+
+                origin = `${origin_city}, ${origin_state}`;
+                destination = `${destination_city}, ${destination_state}`;
+                
 
                 fetch(`/request_distance/${origin}&${destination}`, {
                     method: 'POST',
