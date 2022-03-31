@@ -15,13 +15,19 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('#estimate-description').innerHTML = '';
             document.querySelector('#estimates').innerHTML = '';
 
+            // Hide the form
+            document.querySelector('.estimate-form').style.display = 'none';
+
             // If using the simple form, use that input as the number of miles
             if (document.querySelector('#miles') !== null)
             {
-                // Get the miles and display the relevant estimates
+                // Get and display the miles used to calculate the estimates
                 miles = document.querySelector('#miles').value;
+                show_inputs(miles);
+                
+                // Display the relevant estimates and save link
                 show_estimates(miles);
-                show_save_link(miles); // Display the link to save the estimate
+                show_save_link(miles);
                 
 
             } else {
@@ -43,13 +49,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(response => response.json())
                 .then(data => {
 
-                    // Display origin and destination
-                    show_from_to(data.origin_address, data.destination_address);
-
-                    // Get the miles and display the relevant estimates
+                    // Get miles 
                     miles = data.miles;
+
+                    // Display the miles, origin, and destination used to calculate the estimates
+                    show_inputs(miles, data.origin_address, data.destination_address);
+
+                    // Display the relevant estimates and save link
                     show_estimates(miles);
-                    show_save_link(`${miles}&${origin}&${destination}`); // Display the link to save the estimate
+                    show_save_link(`${miles}&${origin}&${destination}`);
                 })
             }
             
@@ -80,16 +88,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function show_from_to(origin_address, destination_address) {
+function show_inputs(miles, origin_address='', destination_address='') {
+    miles_header = document.createElement('h3');
+    miles_header.innerHTML = `${miles} miles`;
+
     from = document.createElement('div');
-    from.innerHTML = `From: ${origin_address}`;
+    from.innerHTML = `from: ${origin_address}`;
 
     to = document.createElement('div');
-    to.innerHTML = `To: ${destination_address}`;
+    to.innerHTML = `to: ${destination_address}`;
 
     from_to_div = document.querySelector('#from-to');
 
-    from_to_div.append(from, to);
+    from_to_div.append(miles_header, from, to);
 }
 
 
@@ -153,6 +164,7 @@ function show_save_link(params) {
 
     // Create and display the link to save an estimate
     save_estimate = document.createElement('a');
+    save_estimate.classList = "btn btn-success";
     save_estimate.innerHTML = 'Save this estimate';
     save_estimate.href = `/save_estimate/${params}`;
     document.querySelector('#options').append(save_estimate);
