@@ -9,7 +9,6 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 
 from .models import SavedEstimate, User
-from .forms import EstimateFormAtoB
 
 import os
 from dotenv import load_dotenv
@@ -27,8 +26,7 @@ def usa_simple(request):
     return render(request, "usa_simple.html")
 
 def usa_advanced(request):
-    form = EstimateFormAtoB()
-    return render(request, "usa_advanced.html", {"form": form})
+    return render(request, "usa_advanced.html")
 
 
 def create_account(request):
