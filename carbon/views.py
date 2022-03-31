@@ -177,11 +177,13 @@ def request_distance(request, origin, destination):
    
     # Get the Place ID for the origin
     origin_encoded = urllib.parse.quote(origin)
-    origin_id = request_place_id(origin_encoded)
+    origin_dict = request_place(origin_encoded)
+    origin_id = origin_dict["candidates"][0]["place_id"]
 
     # Get the Place ID for the destination
     destination_encoded = urllib.parse.quote(destination)
-    destination_id = request_place_id(destination_encoded)
+    destination_dict = request_place(destination_encoded)
+    destination_id = destination_dict["candidates"][0]["place_id"]
 
     # Pass the origin and destination Place IDs to the Distance Matrix API to get the number of miles
     url = f"https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:{origin_id}&destinations=place_id:{destination_id}&units=imperial&key={GOOGLE_MAPS_API_KEY}"
@@ -202,17 +204,17 @@ def request_distance(request, origin, destination):
     return JsonResponse(distance)
 
 
-def request_place_id(input_encoded):
-    url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={input_encoded}&inputtype=textquery&key={GOOGLE_MAPS_API_KEY}"
+def request_place(input_encoded):
+    url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?formatted_address,name,place_id,type&input={input_encoded}&inputtype=textquery&key={GOOGLE_MAPS_API_KEY}"
     payload={}
     headers = {}
     response = requests.request("GET", url, headers=headers, data=payload)
 
-    # Convert the response object to a dictionary
+    # Convert the response object to a dictionary containing all the place info
     dict = response.json()
 
-    # Return the Place ID
-    return(dict["candidates"][0]["place_id"])
+    # Return the dict
+    return(dict)
 
 
 def save_estimate(request, miles, origin='', destination=''):
