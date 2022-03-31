@@ -3,9 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // If there is an estimate form on the page
     if (document.querySelector('.estimate-form') !== null)
     {
-        // Hide description
-        document.querySelector('#estimate-description').style.display = 'none';
-
         // Listen for the submission of the estimate forms
         document.querySelector('.estimate-form').onsubmit = () => {
 
@@ -13,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.btn').disabled = true;
 
             // Clear any previous estimates
+            document.querySelector('#options').innerHTML = '';
+            document.querySelector('#from-to').innerHTML = '';
+            document.querySelector('#estimate-description').innerHTML = '';
             document.querySelector('#estimates').innerHTML = '';
 
             // If using the simple form, use that input as the number of miles
@@ -106,7 +106,7 @@ function show_estimates(miles) {
         air = wine_bottles("Air", estimates.air);
 
         // Show description 
-        document.querySelector('#estimate-description').style.display = 'block';
+        document.querySelector('#estimate-description').innerHTML = 'CO2e emitted when traveling by...';
 
         // Update the page to display all estimates
         travel_modes = document.createElement('div');
