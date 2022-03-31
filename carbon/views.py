@@ -199,13 +199,21 @@ def request_distance(request, origin, destination):
     meters = dict["rows"][0]["elements"][0]["distance"]["value"]
     miles = math.ceil(meters / 1609.344)
 
-    # Return the number of miles as JSON
-    distance = {"miles": miles}
-    return JsonResponse(distance)
+    # Get the address of the origin and destination for display
+    origin_address = origin_dict["candidates"][0]["formatted_address"]
+    destination_address = destination_dict["candidates"][0]["formatted_address"]
+
+    # Return the number of miles -- along with the origin and destination addresses -- as JSON
+    data = {
+        "destination_address": destination_address,
+        "miles": miles,
+        "origin_address": origin_address
+    }
+    return JsonResponse(data)
 
 
 def request_place(input_encoded):
-    url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?formatted_address,name,place_id,type&input={input_encoded}&inputtype=textquery&key={GOOGLE_MAPS_API_KEY}"
+    url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?fields=formatted_address,name,place_id,type&input={input_encoded}&inputtype=textquery&key={GOOGLE_MAPS_API_KEY}"
     payload={}
     headers = {}
     response = requests.request("GET", url, headers=headers, data=payload)

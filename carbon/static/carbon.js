@@ -41,10 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     mode: 'same-origin'
                 })
                 .then(response => response.json())
-                .then(distance => {
+                .then(data => {
+
+                    // Display origin and destination
+                    show_from_to(data.origin_address, data.destination_address);
 
                     // Get the miles and display the relevant estimates
-                    miles = distance.miles;
+                    miles = data.miles;
                     show_estimates(miles);
                     show_save_link(`${miles}&${origin}&${destination}`); // Display the link to save the estimate
                 })
@@ -76,6 +79,18 @@ document.addEventListener('DOMContentLoaded', function() {
         })       
     }
 });
+
+function show_from_to(origin_address, destination_address) {
+    from = document.createElement('div');
+    from.innerHTML = `From: ${origin_address}`;
+
+    to = document.createElement('div');
+    to.innerHTML = `To: ${destination_address}`;
+
+    from_to_div = document.querySelector('#from-to');
+
+    from_to_div.append(from, to);
+}
 
 
 function show_estimates(miles) {
