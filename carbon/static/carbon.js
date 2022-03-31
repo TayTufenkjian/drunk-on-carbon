@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Clear any previous estimates
             document.querySelector('#options').innerHTML = '';
-            document.querySelector('#from-to').innerHTML = '';
+            document.querySelector('#inputs').innerHTML = '';
             document.querySelector('#estimate-description').innerHTML = '';
             document.querySelector('#estimates').innerHTML = '';
 
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function show_inputs(miles, origin_address='', destination_address='') {
 
     // Select the div that will contain the inputs
-    from_to_div = document.querySelector('#from-to');
+    inputs_div = document.querySelector('#inputs');
 
     // Create and populate the miles header
     miles_header = document.createElement('h3');
@@ -117,9 +117,9 @@ function show_inputs(miles, origin_address='', destination_address='') {
     // Populate the inputs section depending on the inputs submitted
     if (origin_address == '')
     {
-        from_to_div.append(miles_header);
+        inputs_div.append(miles_header);
     } else {
-        from_to_div.append(miles_header, from, to);
+        inputs_div.append(miles_header, from, to);
     }
 }
 
