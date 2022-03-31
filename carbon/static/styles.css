@@ -25,11 +25,18 @@ form input {
 }
 
 .saved-estimate {
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
+    border-top: 1px solid #d6d8db;
+    border-right: 1px solid #d6d8db;
+    border-left: 1px solid #d6d8db;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 1rem;
 }
 
 .saved-estimate:last-of-type {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #d6d8db;
+}
+
+.saved-estimate:hover {
+    background-color: #cee2fd;
 }
