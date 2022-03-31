@@ -3,6 +3,7 @@ import math
 import requests
 import urllib.parse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -225,6 +226,7 @@ def request_place(input_encoded):
     return(dict)
 
 
+@login_required
 def save_estimate(request, miles, origin='', destination=''):
     
     # Save the estimate for the current user

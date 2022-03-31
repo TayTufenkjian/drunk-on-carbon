@@ -31,6 +31,11 @@
                 </select>
             </div>
         </div>
+
+        {% if user.is_authenticated %}
+            <input type="hidden" id="user" value="is_authenticated">
+        {% endif %}
+        
         <input type="submit" class="btn btn-primary" value="Estimate">
     </form>
     

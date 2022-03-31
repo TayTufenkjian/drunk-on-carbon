@@ -25,10 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 miles = document.querySelector('#miles').value;
                 show_inputs(miles);
                 
-                // Display the relevant estimates and save link
+                // Display the relevant estimates
                 show_estimates(miles);
-                show_save_link(miles);
-                
+
+                // If user is authenticated, display the save link
+                if (document.querySelector('#user') !== null)
+                {
+                    show_save_link(miles);
+                }
 
             } else {
                 // If using the advanced form, request the distance from Google Maps
@@ -57,7 +61,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     // Display the relevant estimates and save link
                     show_estimates(miles);
-                    show_save_link(`${miles}&${origin}&${destination}`);
+
+                    // If user is authenticated, display the save link
+                    if (document.querySelector('#user') !== null)
+                    {
+                        show_save_link(`${miles}&${origin}&${destination}`);
+                    }
                 })
             }
             
