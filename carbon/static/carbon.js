@@ -3,8 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // If there is an estimate form on the page
     if (document.querySelector('.estimate-form') !== null)
     {
+        // Select the estimate form 
+        estimate_form = document.querySelector('.estimate-form');
+
         // Listen for the submission of the estimate forms
-        document.querySelector('.estimate-form').onsubmit = () => {
+        estimate_form.onsubmit = () => {
 
             // Disable the submit button to prevent duplicate form submissions
             document.querySelector('.btn').disabled = true;
@@ -16,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('#estimates').innerHTML = '';
 
             // Hide the form
-            document.querySelector('.estimate-form').style.display = 'none';
+            estimate_form.style.display = 'none';
 
             // If using the simple form, use that input as the number of miles
             if (document.querySelector('#miles') !== null)
@@ -77,14 +80,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // If there are saved estimates on the page
     if (document.querySelector('.saved-estimate') !== null)
-    {
-        saved_estimate = document.querySelector('.saved-estimate');
+    {   
+        // Select all saved estimates
+        saved_estimates = document.querySelectorAll('.saved-estimate');
 
         // Hide description
         document.querySelector('#estimate-description').style.display = 'none';
 
         // Listen for a hover(mouseover) on the saved estimates
-        document.querySelectorAll('.saved-estimate').forEach(item => {
+        saved_estimates.forEach(item => {
             item.addEventListener('mouseover', event => {
                 // Show the delete button for that saved estimate
                 delete_button = item.querySelector('button');
@@ -98,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
 
         // Listen for a click on the saved estimates
-        document.querySelectorAll('.saved-estimate').forEach(item => {
+        saved_estimates.forEach(item => {
             item.addEventListener('click', event => {
 
                 // Find the target of the click event
@@ -126,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })       
     }
 });
+
 
 function show_inputs(miles, origin_address='', destination_address='') {
 
