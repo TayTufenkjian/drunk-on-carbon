@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hide the form
             estimate_form.style.display = 'none';
 
+            // Show loading text
+            show_loading();
+
             // If using the simple form, use that input as the number of miles
             if (document.querySelector('#miles') !== null)
             {
@@ -200,8 +203,7 @@ function show_estimates(miles) {
 
         document.querySelector('#estimates').append(travel_modes, all_bottles);
 
-        // Return the promise that the show links functions are waiting for
-        return new Promise((resolve, reject)=>{resolve()});
+        hide_loading();
     })
 }
 
@@ -253,6 +255,19 @@ function show_saved_estimates_link() {
     document.querySelector('#options').append(all_estimates);
 }
 
+
+function show_loading() {
+    options = document.querySelector('#options');
+    loading = document.createElement('div');
+    loading.id = 'loading';
+    loading.innerHTML = 'Loading your estimate ...';
+    options.append(loading);
+}
+
+function hide_loading() {
+    loading = document.querySelector('#loading');
+    loading.remove();
+}
 
 // Get the CSRF token
 // Copied and pasted from the Django documentation https://docs.djangoproject.com/en/4.0/ref/csrf/
