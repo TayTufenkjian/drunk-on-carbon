@@ -227,7 +227,7 @@ def request_place(input_encoded):
 
 
 @login_required
-def save_estimate(request, miles, origin='', destination=''):
+def save_estimate(request, miles, origin='', destination='', origin_formatted='', destination_formatted=''):
     
     # Save the estimate for the current user
     saved_estimate = SavedEstimate()
@@ -235,6 +235,8 @@ def save_estimate(request, miles, origin='', destination=''):
     saved_estimate.miles = miles
     saved_estimate.origin = origin
     saved_estimate.destination = destination
+    saved_estimate.origin_formatted = origin_formatted
+    saved_estimate.destination_formatted = destination_formatted
     saved_estimate.save()
 
     # Redirect to the user's saved estimates page
@@ -252,3 +254,8 @@ def delete_saved_estimate(request, id):
     saved_estimate = SavedEstimate.objects.get(id=id)
     saved_estimate.delete()
     return HttpResponse("OK")
+
+
+def load_saved_estimate(request, id):
+    saved_estimate = SavedEstimate.objects.get(id=id)
+    return JsonResponse(saved_estimate.serialize())

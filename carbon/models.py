@@ -12,3 +12,13 @@ class SavedEstimate(models.Model):
     origin = models.TextField(max_length=500, default='')
     destination = models.TextField(max_length=500, default='')
     timestamp = models.DateTimeField(auto_now_add=True)
+    origin_formatted = models.TextField(default='')
+    destination_formatted = models.TextField(default='')
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "miles": self.miles,
+            "origin_formatted": self.origin_formatted,
+            "destination_formatted": self.destination_formatted
+        }

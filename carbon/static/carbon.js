@@ -56,11 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(response => response.json())
                 .then(data => {
 
-                    // Get miles 
+                    // Get miles and formatted addresses
                     miles = data.miles;
+                    origin_formatted = data.origin_address;
+                    destination_formatted = data.destination_address;
 
                     // Display the miles, origin, and destination used to calculate the estimates
-                    show_inputs(miles, data.origin_address, data.destination_address);
+                    show_inputs(miles, origin_formatted, destination_formatted);
 
                     // Display the relevant estimates and save link
                     show_estimates(miles);
@@ -68,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // If user is authenticated, display the save link
                     if (document.querySelector('#user') !== null)
                     {
-                        show_save_link(`${miles}&${origin}&${destination}`);
+                        show_save_link(`${miles}&${origin}&${destination}&${origin_formatted}&${destination_formatted}`);
                     }
                 })
             }
@@ -120,11 +122,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Hide all the saved estimates
                     document.querySelector('#saved-estimates').style.display = 'none';
 
-                    // Display the relevant estimate with wine bottles
-                    show_estimates(item.querySelector('#miles').value);
+                    // Get saved estimate data
+                    id = item.id;
+                    fetch(`load/${id}`)
+                    .then(response => response.json())
+                    .then(saved_estimate => {
 
-                    // Display the link for all saved estimates
-                    show_saved_estimates_link();
+                        // Display the miles, origin, and destination used to calculate the saved estimate
+                        show_inputs(saved_estimate.miles, saved_estimate.origin_formatted, saved_estimate.destination_formatted);
+
+                        // Display the relevant estimate with wine bottles
+                        show_estimates(saved_estimate.miles);
+
+                        // Display the link for all saved estimates
+                        show_saved_estimates_link();
+
+                    })
+
+
                 }
             })
         })       
