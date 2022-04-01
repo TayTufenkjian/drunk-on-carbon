@@ -125,6 +125,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Hide all the saved estimates
                     document.querySelector('#saved-estimates').style.display = 'none';
 
+                    // Show loading text
+                    show_loading();
+
                     // Get saved estimate data
                     id = item.id;
                     fetch(`load/${id}`)
@@ -257,11 +260,11 @@ function show_saved_estimates_link() {
 
 
 function show_loading() {
-    options = document.querySelector('#options');
+    estimates = document.querySelector('#estimates');
     loading = document.createElement('div');
     loading.id = 'loading';
     loading.innerHTML = 'Loading your estimate ...';
-    options.append(loading);
+    estimates.append(loading);
 }
 
 function hide_loading() {

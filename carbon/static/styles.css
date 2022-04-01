@@ -20,6 +20,10 @@ form input {
     margin-bottom: 1rem;
 }
 
+#loading {
+    margin: auto 40%;
+}
+
 .navbar-brand, .navbar-brand:hover {
     color: #212529;
     text-decoration: none;
