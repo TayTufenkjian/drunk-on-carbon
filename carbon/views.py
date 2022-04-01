@@ -246,3 +246,9 @@ def saved_estimates_view(request):
     return render(request, "saved_estimates.html", {
         "saved_estimates": saved_estimates
     })
+
+
+def delete_saved_estimate(request, id):
+    saved_estimate = SavedEstimate.objects.get(id=id)
+    saved_estimate.delete()
+    return HttpResponse("OK")

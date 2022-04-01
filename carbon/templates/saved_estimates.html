@@ -6,7 +6,7 @@
         <h2>Your saved estimates</h2>
 
         {% for estimate in saved_estimates %}
-        <div class="saved-estimate">
+        <div class="saved-estimate" id="{{ estimate.id }}">
             <button class="btn btn-danger delete" style="display: none;">Delete</button>
             {% if estimate.origin %}
                 <div>{{ estimate.origin }} to {{ estimate.destination }}</div>

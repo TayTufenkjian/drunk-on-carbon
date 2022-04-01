@@ -16,5 +16,6 @@ urlpatterns = [
 
     # API Routes
     path("estimate/<int:miles>", views.estimate, name="estimate"),
-    path("request_distance/<str:origin>&<str:destination>", views.request_distance, name="request_distance")
+    path("request_distance/<str:origin>&<str:destination>", views.request_distance, name="request_distance"),
+    path("delete/<int:id>", views.delete_saved_estimate, name="delete_saved_estimate")
 ]

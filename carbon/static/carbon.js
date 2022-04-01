@@ -86,10 +86,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Listen for a hover(mouseover) on the saved estimates
         document.querySelectorAll('.saved-estimate').forEach(item => {
             item.addEventListener('mouseover', event => {
-
                 // Show the delete button for that saved estimate
                 delete_button = item.querySelector('button');
-                delete_button.style.display = 'block';            
+                delete_button.style.display = 'block';
+
             })
             item.addEventListener('mouseout', event => {
                 // Hide the delete button
@@ -100,14 +100,28 @@ document.addEventListener('DOMContentLoaded', function() {
         // Listen for a click on the saved estimates
         document.querySelectorAll('.saved-estimate').forEach(item => {
             item.addEventListener('click', event => {
-                // Hide all the saved estimates
-                document.querySelector('#saved-estimates').style.display = 'none';
 
-                // Display the relevant estimate with wine bottles
-                show_estimates(item.querySelector('#miles').value);
+                // Find the target of the click event
+                let target = event.target;
 
-                // Display the link for all saved estimates
-                show_saved_estimates_link();
+                // If the delete button was clicked, delete the saved estimate
+                if (target.classList.contains('delete'))
+                {
+                    id = item.id;
+                    fetch(`delete/${id}`)
+                    .then(item.remove())
+                    
+                } else {  // Show the details for the saved estimate
+
+                    // Hide all the saved estimates
+                    document.querySelector('#saved-estimates').style.display = 'none';
+
+                    // Display the relevant estimate with wine bottles
+                    show_estimates(item.querySelector('#miles').value);
+
+                    // Display the link for all saved estimates
+                    show_saved_estimates_link();
+                }
             })
         })       
     }
