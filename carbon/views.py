@@ -242,7 +242,7 @@ def save_estimate(request, miles, origin='', destination=''):
 
 
 def saved_estimates_view(request):
-    saved_estimates = request.user.saved_estimates.all()
+    saved_estimates = request.user.saved_estimates.all().order_by("-id")
     return render(request, "saved_estimates.html", {
         "saved_estimates": saved_estimates
     })

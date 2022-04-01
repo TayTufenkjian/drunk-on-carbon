@@ -7,12 +7,13 @@
 
         {% for estimate in saved_estimates %}
         <div class="saved-estimate">
+            <button class="btn btn-danger delete" style="display: none;">Delete</button>
             {% if estimate.origin %}
                 <div>{{ estimate.origin }} to {{ estimate.destination }}</div>
             {% else %}
                 <div>{{ estimate.miles }} Miles</div>
             {% endif %}
-            <input type="hidden" id="miles" value="{{ estimate.miles }}">
+            <input type="hidden" id="miles" value="{{ estimate.miles }}">            
         </div>
         {% endfor %}
     </div>

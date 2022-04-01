@@ -7,6 +7,11 @@
     margin: 1rem 0;
 }
 
+button.delete {
+    float: right;
+    z-index: 10;
+}
+
 #estimate-description {
     margin: 2rem 0;
 }
@@ -31,6 +36,7 @@ form input {
     cursor: pointer;
     font-size: 18px;
     padding: 1rem;
+    z-index: 5;
 }
 
 .saved-estimate:last-of-type {

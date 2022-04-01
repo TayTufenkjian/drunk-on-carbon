@@ -78,8 +78,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // If there are saved estimates on the page
     if (document.querySelector('.saved-estimate') !== null)
     {
+        saved_estimate = document.querySelector('.saved-estimate');
+
         // Hide description
         document.querySelector('#estimate-description').style.display = 'none';
+
+        // Listen for a hover(mouseover) on the saved estimates
+        document.querySelectorAll('.saved-estimate').forEach(item => {
+            item.addEventListener('mouseover', event => {
+
+                // Show the delete button for that saved estimate
+                delete_button = item.querySelector('button');
+                delete_button.style.display = 'block';            
+            })
+            item.addEventListener('mouseout', event => {
+                // Hide the delete button
+                delete_button.style.display = 'none';
+            })
+        })
 
         // Listen for a click on the saved estimates
         document.querySelectorAll('.saved-estimate').forEach(item => {
