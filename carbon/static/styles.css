@@ -1,3 +1,19 @@
+/* Fade-in comes from https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/ */
+.body-container {
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
 .all-bottles, .travel-modes, .all-bottles img {
     margin: 1rem 0;
 }
@@ -7,9 +23,10 @@ button.delete {
     z-index: 10;
 }
 
-.container {
+.layout-container {
     margin-top: 3rem;
     max-width: 960px;
+    transition: all 1s ease-in-out;
 }
 
 #estimate-description {

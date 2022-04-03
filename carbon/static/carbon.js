@@ -206,6 +206,7 @@ function show_estimates(miles) {
 
         document.querySelector('#estimates').append(travel_modes, all_bottles);
 
+
         hide_loading();
     })
 }
