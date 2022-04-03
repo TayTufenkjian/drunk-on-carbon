@@ -2,7 +2,28 @@
 {% load static %}
 
 {% block body %}
-    <p>Visualizing carbon dioxide equivalents as bottles of wine</p>
-    <a href="{% url 'usa_simple' %}"><p>USA travel - simple</p></a>
-    <a href="{% url 'usa_advanced' %}"><p>USA travel - advanced</p></a>
+    <div id="index">
+        <p>Visualizing carbon dioxide equivalents as bottles of wine</p>
+        <div class="row gx-5">
+            <div class="col">
+                <a href="{% url 'usa_simple' %}">
+                    <div class="p-4 border tile">
+                            <h3>USA travel</h3>
+                            <img src="static/images/usa-outline.png" alt="black and white map of the United States with state outlines">
+                            <p>by # of miles</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'usa_advanced' %}">
+                    <div class="p-4 border tile">
+                            <h3>USA travel</h3>
+                            <img src="static/images/usa-outline.png" alt="black and white map of the United States with state outlines">
+                            <p>from Origin to Destination</p>
+                        
+                    </div>
+                </a>
+            </div>  
+        </div>
+    </div>
 {% endblock %}
