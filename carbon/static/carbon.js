@@ -174,6 +174,7 @@ function show_inputs(miles, origin_address='', destination_address='') {
     if (origin_address == '')
     {
         inputs_div.append(miles_header);
+        
     } else {
         inputs_div.append(miles_header, from, to);
     }
@@ -193,7 +194,9 @@ function show_estimates(miles) {
         air = wine_bottles("Air", estimates.air);
 
         // Show description 
-        document.querySelector('#estimate-description').innerHTML = 'CO2e emitted when traveling by...';
+        description = document.createElement('h2');
+        description.innerHTML = 'CO2e emitted when traveling by...';
+        document.querySelector('#estimate-description').append(description);
 
         // Update the page to display all estimates
         travel_modes = document.createElement('div');
@@ -261,11 +264,11 @@ function show_saved_estimates_link() {
 
 
 function show_loading() {
-    estimates = document.querySelector('#estimates');
+    inputs = document.querySelector('#inputs');
     loading = document.createElement('div');
     loading.id = 'loading';
     loading.innerHTML = 'Loading your estimate ...';
-    estimates.append(loading);
+    inputs.append(loading);
 }
 
 function hide_loading() {
