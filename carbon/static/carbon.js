@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function show_inputs(miles, origin_address='', destination_address='') {
 
     // Select the div that will contain the inputs
-    inputs_div = document.querySelector('#inputs');
+    inputs_div = document.querySelector('#inputs'); 
 
     // Create and populate the miles header
     miles_header = document.createElement('h3');
@@ -208,7 +208,6 @@ function show_estimates(miles) {
         all_bottles.append(car.bottles, rail.bottles, air.bottles);
 
         document.querySelector('#estimates').append(travel_modes, all_bottles);
-
 
         hide_loading();
     })

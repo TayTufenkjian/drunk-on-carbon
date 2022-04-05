@@ -1,10 +1,4 @@
-/* Fade-in comes from https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/ */
-.body-container {
-    animation: fadeInAnimation ease 2s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-}
-  
+/* Fade-in from https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/ */
 @keyframes fadeInAnimation {
     0% {
         opacity: 0;
@@ -12,6 +6,12 @@
     100% {
         opacity: 1;
      }
+}
+
+.body-container {
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 #estimates>*, #estimate-description>*, #inputs>* {
@@ -32,7 +32,6 @@ button.delete {
 .layout-container {
     margin-top: 3rem;
     max-width: 960px;
-    transition: all 1s ease-in-out;
 }
 
 #estimate-description {
@@ -76,6 +75,9 @@ form input {
 
 #options a[class="btn btn-success"] {
     float: right;
+    position: relative;
+    z-index: 999;
+
 }
 
 .saved-estimate {
