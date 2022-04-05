@@ -59,21 +59,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(response => response.json())
                 .then(data => {
 
-                    // Get miles and formatted addresses
-                    miles = data.miles;
-                    origin_formatted = data.origin_address;
-                    destination_formatted = data.destination_address;
+                    // If there was an error, display the error message
+                    if (data.error) {
+                        message = document.createElement('div');
+                        message.innerHTML = data.message;
+                        document.querySelector('#estimates').append(message);     
+                        hide_loading();
+                    } else {
+                        // Get miles and formatted addresses
+                        miles = data.miles;
+                        origin_formatted = data.origin_address;
+                        destination_formatted = data.destination_address;
 
-                    // Display the miles, origin, and destination used to calculate the estimates
-                    show_inputs(miles, origin_formatted, destination_formatted);
+                        // Display the miles, origin, and destination used to calculate the estimates
+                        show_inputs(miles, origin_formatted, destination_formatted);
 
-                    // Display the relevant estimates and save link
-                    show_estimates(miles);
+                        // Display the relevant estimates and save link
+                        show_estimates(miles);
 
-                    // If user is authenticated, display the save link
-                    if (document.querySelector('#user') !== null)
-                    {
-                        show_save_link(`${miles}&${origin}&${destination}&${origin_formatted}&${destination_formatted}`);
+                        // If user is authenticated, display the save link
+                        if (document.querySelector('#user') !== null)
+                        {
+                            show_save_link(`${miles}&${origin}&${destination}&${origin_formatted}&${destination_formatted}`);
+                        }
                     }
                 })
             }

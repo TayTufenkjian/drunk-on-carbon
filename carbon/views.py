@@ -179,12 +179,30 @@ def request_distance(request, origin, destination):
     # Get the Place ID for the origin
     origin_encoded = urllib.parse.quote(origin)
     origin_dict = request_place(origin_encoded)
-    origin_id = origin_dict["candidates"][0]["place_id"]
+    
+    # Return an error message if there are no results for the origin
+    try:
+        origin_id = origin_dict["candidates"][0]["place_id"]
+    except IndexError:
+        data = {
+            "error": "IndexError",
+            "message": "We could not find that origin. Please try again."
+        } 
+        return JsonResponse(data)
 
     # Get the Place ID for the destination
     destination_encoded = urllib.parse.quote(destination)
     destination_dict = request_place(destination_encoded)
-    destination_id = destination_dict["candidates"][0]["place_id"]
+
+    # Return an error message if there are no results for the destination
+    try:
+        destination_id = destination_dict["candidates"][0]["place_id"]
+    except IndexError:
+        data = {
+            "error": "IndexError",
+            "message": "We could not find that destination. Please try again."
+        } 
+        return JsonResponse(data)
 
     # Pass the origin and destination Place IDs to the Distance Matrix API to get the number of miles
     url = f"https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:{origin_id}&destinations=place_id:{destination_id}&units=imperial&key={GOOGLE_MAPS_API_KEY}"
