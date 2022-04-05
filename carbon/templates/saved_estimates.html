@@ -5,6 +5,10 @@
     <div id="saved-estimates">
         <h2>Your saved estimates</h2>
 
+        {% if saved_estimates.count == 0 %}
+            You haven't saved any estimates yet.
+        {% endif %}
+
         {% for estimate in saved_estimates %}
         <div class="saved-estimate" id="{{ estimate.id }}">
             <button class="btn btn-danger delete" style="display: none;">Delete</button>
