@@ -62,9 +62,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     // If there was an error, display the error message
                     if (data.error) {
                         message = document.createElement('div');
+                        message.classList = ('mb-4');
                         message.innerHTML = data.message;
-                        document.querySelector('#estimates').append(message);     
+
+                        action = document.createElement('button');
+                        action.classList = ('btn btn-primary');
+                        action.innerHTML = 'Try again';
+                        action.onclick = (function() {window.location.reload()});
+
+                        document.querySelector('#estimates').append(message, action);     
                         hide_loading();
+
                     } else {
                         // Get miles and formatted addresses
                         miles = data.miles;

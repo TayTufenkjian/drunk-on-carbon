@@ -186,7 +186,7 @@ def request_distance(request, origin, destination):
     except IndexError:
         data = {
             "error": "IndexError",
-            "message": "We could not find that origin. Please try again."
+            "message": "We could not find that origin."
         } 
         return JsonResponse(data)
 
@@ -200,7 +200,7 @@ def request_distance(request, origin, destination):
     except IndexError:
         data = {
             "error": "IndexError",
-            "message": "We could not find that destination. Please try again."
+            "message": "We could not find that destination."
         } 
         return JsonResponse(data)
 
