@@ -4,6 +4,7 @@ import requests
 import urllib.parse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
 from django.db import IntegrityError
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -88,6 +89,50 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
+
+
+@login_required
+def user_account(request):
+    return render(request, "user_account.html")
+
+
+@login_required
+def change_password(request):
+
+    # Can only be accessed via POST
+    if request.method == 'POST':
+
+        # Get the user and form data
+        user = request.user
+        current_password = request.POST["current_password"]
+        new_password = request.POST["new_password"]
+        confirm_new_password = request.POST["confirm_new_password"]
+
+        # Check that user entered the correct current password
+        if check_password(current_password, request.user.password):
+            
+            # Check that the new password and confirm new password values match
+            if new_password == confirm_new_password:        
+            
+                # Update the password 
+                user.set_password(new_password)
+                user.save()
+
+                # Keep the user logged in
+                login(request, user)
+
+                # Display success message
+                message = "Your password has been changed successfully!"
+
+            else:
+                # Display error mesage about the new password confirmation
+                message = "New password and new password confirmation do not match."
+
+        else:
+            # Display error message about current password
+            message = "The current password you entered does not match your existing password."
+        
+        return render(request, "user_account.html", {"message": message})
 
 
 def estimate(request, miles):

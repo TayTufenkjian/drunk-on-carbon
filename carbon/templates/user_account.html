@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    <h2>Your user account</h2>
+    <hr>
+
+    <div class="mb-4">
+        <h3>Username</h3>
+        <p>{{ request.user }}</p>
+    </div>
+
+    <h3>Change password</h3>
+    <form action="/change_password" method="post">
+        {% csrf_token %}       
+        <div class="mb-4">
+            <label for="current_password">Current password</label>
+            <input type="password" class="form-control" name="current_password" id="current_password" required>
+        </div>
+        <div class="mb-4">
+            <label for="new_password">New password</label>
+            <input type="password" class="form-control" name="new_password" id="new_password" required>
+        </div>
+        <div class="mb-4">
+            <label for="confirm_new_password">Confirm new password</label>
+            <input type="password" class="form-control" name="confirm_new_password" id="confirm_new_password" required>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Change password">
+    </form>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+{% endblock %}
