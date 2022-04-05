@@ -59,8 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(response => response.json())
                 .then(data => {
 
-                    // If there was an error, display the error message
+                    // If there was an error, log the error and display the error message
                     if (data.error) {
+                        console.log(data.error);
+
                         message = document.createElement('div');
                         message.classList = ('mb-4');
                         message.innerHTML = data.message;
