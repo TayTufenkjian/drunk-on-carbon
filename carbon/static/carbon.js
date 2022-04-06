@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hide the form
             estimate_form.style.display = 'none';
 
-            // Show loading text
-            show_loading();
+            // Show loading spinner
+            document.querySelector('#loading').style.display = 'block';
 
             // If using the simple form, use that input as the number of miles
             if (document.querySelector('#miles') !== null)
@@ -73,7 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         action.onclick = (function() {window.location.reload()});
 
                         document.querySelector('#estimates').append(message, action);     
-                        hide_loading();
+                        
+                        // Hide loading spinner
+                        document.querySelector('#loading').style.display = 'none';
 
                     } else {
                         // Get miles and formatted addresses
@@ -140,8 +142,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Hide all the saved estimates
                     document.querySelector('#saved-estimates').style.display = 'none';
 
-                    // Show loading text
-                    show_loading();
+                    // Show loading spinner
+                    document.querySelector('#loading').style.display = 'block';
 
                     // Get saved estimate data
                     id = item.id;
@@ -224,7 +226,8 @@ function show_estimates(miles) {
 
         document.querySelector('#estimates').append(travel_modes, all_bottles);
 
-        hide_loading();
+        // Hide loading spinner
+        document.querySelector('#loading').style.display = 'none';
     })
 }
 
@@ -276,19 +279,6 @@ function show_saved_estimates_link() {
     document.querySelector('#options').append(all_estimates);
 }
 
-
-function show_loading() {
-    estimates = document.querySelector('#estimates');
-    loading = document.createElement('div');
-    loading.id = 'loading';
-    loading.innerHTML = 'Loading your estimate ...';
-    estimates.append(loading);
-}
-
-function hide_loading() {
-    loading = document.querySelector('#loading');
-    loading.remove();
-}
 
 // Get the CSRF token
 // Copied and pasted from the Django documentation https://docs.djangoproject.com/en/4.0/ref/csrf/
