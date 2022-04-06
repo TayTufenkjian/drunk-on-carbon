@@ -8,7 +8,7 @@
         <div>{{ message }}</div>
     {% endif %}
 
-    <form action="{% url 'create_account' %}" method="post">
+    <form action="{% url 'create_account' %}" method="post" class="one-col">
         {% csrf_token %}
         <input class="form-control mb-4" autofocus type="text" name="username" placeholder="Username">
         <input class="form-control mb-4" type="email" name="email" placeholder="Email Address">

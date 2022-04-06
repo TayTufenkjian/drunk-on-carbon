@@ -38,13 +38,15 @@ button.delete {
     margin: 2rem 0;
 }
 
+form.one-col {
+    max-width: 500px;
+}
+
 form input {
     margin-bottom: 1rem;
 }
 
 h2 {
-    border-bottom: 1px solid #D2D2D7;
-    padding-bottom: 1rem;
     margin-bottom: 1rem;
 }
 
