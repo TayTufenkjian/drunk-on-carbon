@@ -27,6 +27,9 @@ def index(request):
 def about(request):
     return render(request, "about.html")
 
+def faq(request):
+    return render(request, "faq.html")
+
 def usa_travel_miles(request):
     return render(request, "usa_travel_miles.html")
 
