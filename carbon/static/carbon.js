@@ -212,7 +212,7 @@ function show_estimates(miles) {
         air = wine_bottles("Air", estimates.air);
 
         // Show description 
-        description = document.createElement('h2');
+        description = document.createElement('h3');
         description.innerHTML = 'CO2e emitted when traveling by...';
         document.querySelector('#estimate-description').append(description);
 
@@ -249,7 +249,7 @@ function wine_bottles(travel_mode, kg) {
     let text = document.createElement('div');
     text.id = `${travel_mode}`;
     text.classList.add('col');
-    text.innerHTML = `<h3>${travel_mode} - ${kg} kg</h3>`;
+    text.innerHTML = `<h4>${travel_mode} - ${kg} kg</h4>`;
 
     // Return an object containing the estimate text and bottle images
     return {'text': text, 'bottles': bottles};
@@ -281,11 +281,11 @@ function show_saved_estimates_link() {
 
 
 function show_loading() {
-    inputs = document.querySelector('#inputs');
+    estimates = document.querySelector('#estimates');
     loading = document.createElement('div');
     loading.id = 'loading';
     loading.innerHTML = 'Loading your estimate ...';
-    inputs.append(loading);
+    estimates.append(loading);
 }
 
 function hide_loading() {
