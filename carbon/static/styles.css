@@ -1,3 +1,4 @@
+/* START Animation  */
 /* Fade-in from https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/ */
 @keyframes fadeInAnimation {
     0% {
@@ -19,6 +20,25 @@
     animation-iteration-count: 1;
     animation-fill-mode: forwards;   
 }
+
+/* END Animation  */
+
+/* START Sticky Footer Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+    padding: 20px;
+}
+/* END Sticky Footer Styles */
 
 .all-bottles, .travel-modes, .all-bottles img {
     margin: 1rem 0;
