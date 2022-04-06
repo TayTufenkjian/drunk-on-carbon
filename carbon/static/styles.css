@@ -42,6 +42,12 @@ form input {
     margin-bottom: 1rem;
 }
 
+h2 {
+    border-bottom: 1px solid #D2D2D7;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
 #index .col a {
     color: inherit;
     text-decoration: none;

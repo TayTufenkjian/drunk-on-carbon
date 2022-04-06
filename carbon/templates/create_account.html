@@ -10,10 +10,10 @@
 
     <form action="{% url 'create_account' %}" method="post">
         {% csrf_token %}
-        <input class="form-control" autofocus type="text" name="username" placeholder="Username">
-        <input class="form-control" type="email" name="email" placeholder="Email Address">
-        <input class="form-control" type="password" name="password" placeholder="Password">
-        <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        <input class="form-control mb-4" autofocus type="text" name="username" placeholder="Username">
+        <input class="form-control mb-4" type="email" name="email" placeholder="Email Address">
+        <input class="form-control mb-4" type="password" name="password" placeholder="Password">
+        <input class="form-control mb-4" type="password" name="confirmation" placeholder="Confirm Password">
         <input class="btn btn-primary" type="submit" value="Create account">
     </form>
 

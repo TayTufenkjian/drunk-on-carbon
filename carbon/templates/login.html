@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h2>Login</h2>
+    <h2>Log in</h2>
 
     {% if message %}
         <div>{{ message }}</div>
@@ -10,9 +10,9 @@
 
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
-        <input autofocus class="form-control" type="text" name="username" placeholder="Username">
-        <input class="form-control" type="password" name="password" placeholder="Password">
-        <input class="btn btn-primary" type="submit" value="Login">
+        <input autofocus class="form-control mb-4" type="text" name="username" placeholder="Username">
+        <input class="form-control mb-4" type="password" name="password" placeholder="Password">
+        <input class="btn btn-primary" type="submit" value="Log in">
     </form>
 
     <p>Don't have an account? <a href="{% url 'create_account' %}">Create one here.</a></p>
