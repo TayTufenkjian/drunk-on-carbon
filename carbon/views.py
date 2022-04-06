@@ -24,6 +24,9 @@ GOOGLE_MAPS_API_KEY = str(os.getenv("GOOGLE_MAPS_API_KEY"))
 def index(request):
     return render(request, "index.html")
 
+def about(request):
+    return render(request, "about.html")
+
 def usa_travel_miles(request):
     return render(request, "usa_travel_miles.html")
 
