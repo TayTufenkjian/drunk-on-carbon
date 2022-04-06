@@ -107,9 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Select all saved estimates
         saved_estimates = document.querySelectorAll('.saved-estimate');
 
-        // Hide description
-        document.querySelector('#estimate-description').style.display = 'none';
-
         // Listen for a hover(mouseover) on the saved estimates
         saved_estimates.forEach(item => {
             item.addEventListener('mouseover', event => {
