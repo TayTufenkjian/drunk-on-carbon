@@ -88,6 +88,10 @@ h2 {
     margin: 1rem auto;
 }
 
+#inputs h3 {
+    color: #198754;
+}
+
 #loading {
     margin: auto 40%;
 }
@@ -127,5 +131,5 @@ h2 {
 }
 
 .travel-modes h4 {
-    text-align: center;
+    padding-left: 19px;
 }

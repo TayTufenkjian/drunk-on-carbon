@@ -211,7 +211,7 @@ function show_estimates(miles) {
         air = wine_bottles("Air", estimates.air);
 
         // Show description 
-        description = document.createElement('h3');
+        description = document.createElement('h4');
         description.innerHTML = 'CO<sub>2</sub>e emitted when traveling by...';
         document.querySelector('#estimate-description').append(description);
 
