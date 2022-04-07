@@ -212,7 +212,7 @@ function show_estimates(miles) {
 
         // Show description 
         description = document.createElement('h3');
-        description.innerHTML = 'CO2e emitted when traveling by...';
+        description.innerHTML = 'CO<sub>2</sub>e emitted when traveling by...';
         document.querySelector('#estimate-description').append(description);
 
         // Update the page to display all estimates
