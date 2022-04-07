@@ -9,7 +9,7 @@
                 <a href="{% url 'usa_travel_miles' %}">
                     <div class="mb-3 p-4 border tile">
                             <h3>USA travel</h3>
-                            <img src="static/images/usa-outline-miles.png" alt="black and white map of the United States with state outlines">
+                            <img src="{% static '/images/usa-outline-miles.png' %}" alt="black and white map of the United States with state outlines">
                             <p>by # of miles</p>
                     </div>
                 </a>
@@ -18,7 +18,7 @@
                 <a href="{% url 'usa_travel_places' %}">
                     <div class="mb-3 p-4 border tile">
                             <h3>USA travel</h3>
-                            <img src="static/images/usa-outline-markers.png" alt="black and white map of the United States with state outlines and map markers for origin and destination">
+                            <img src="{% static '/images/usa-outline-markers.png' %}" alt="black and white map of the United States with state outlines and map markers for origin and destination">
                             <p>from Origin to Destination</p>
                         
                     </div>
