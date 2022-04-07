@@ -157,12 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Display the relevant estimate with wine bottles
                         show_estimates(saved_estimate.miles);
 
-                        // Display the link for all saved estimates
-                        show_saved_estimates_link();
-
                     })
-
-
                 }
             })
         })       
@@ -267,16 +262,6 @@ function show_save_link(params) {
 
     // Re-enable the form submit button
     document.querySelector('.btn').disabled = false;
-}
-
-
-function show_saved_estimates_link() {
-
-    // Create and display the link to see all the saved estimates
-    all_estimates = document.createElement('a');
-    all_estimates.innerHTML = 'All saved estimates';
-    all_estimates.href = '/saved_estimates';
-    document.querySelector('#options').append(all_estimates);
 }
 
 
