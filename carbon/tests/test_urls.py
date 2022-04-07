@@ -21,12 +21,12 @@ class PageLoadTestCase(TestCase):
 
     def test_simple_estimate(self):
         """USA simple estimate page loads"""
-        url = "/usa_simple"
+        url = "/usa_travel_miles"
         test_response_status(url)
 
     def test_advanced_page(self):
         """USA advanced estimate page loads"""
-        url = "/usa_advanced"
+        url = "/usa_travel_places"
         test_response_status(url)
 
 

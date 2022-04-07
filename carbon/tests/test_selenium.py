@@ -19,7 +19,7 @@ class EstimateFormLoads(StaticLiveServerTestCase):
     def test_estimate_form_simple(self):
 
         # Get the URL of the page to test
-        self.selenium.get("%s%s" % (self.live_server_url, "/usa_simple"))
+        self.selenium.get("%s%s" % (self.live_server_url, "/usa_travel_miles"))
 
         form = self.selenium.find_elements_by_class_name("estimate-form")
 
