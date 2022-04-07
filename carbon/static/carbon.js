@@ -201,9 +201,9 @@ function show_estimates(miles) {
     .then(estimates => {
 
         // For each mode of travel, get the object containing kg estimate and wine bottle images
-        car = wine_bottles("Car", estimates.car);
-        rail = wine_bottles("Rail", estimates.rail);
-        air = wine_bottles("Air", estimates.air);
+        car = wine_bottles('Car', estimates.car);
+        rail = wine_bottles('Rail', estimates.rail);
+        air = wine_bottles('Air', estimates.air);
 
         // Show description 
         description = document.createElement('h4');
@@ -255,7 +255,7 @@ function show_save_link(params) {
 
     // Create and display the link to save an estimate
     save_estimate = document.createElement('a');
-    save_estimate.classList = "btn btn-success";
+    save_estimate.classList = 'btn btn-success';
     save_estimate.innerHTML = 'Save this estimate';
     save_estimate.href = `/save_estimate/${params}`;
     document.querySelector('#options').append(save_estimate);
