@@ -1,4 +1,5 @@
 from .base import *
+import dj_database_url
 
 SECRET_KEY = str(os.getenv('PROD_SECRET_KEY'))
 
@@ -10,6 +11,10 @@ ALLOWED_HOSTS = ['.herokuapp.com']
 # For these settings to work, the web server must redirect all HTTP traffic to HTTPS, and only transmit HTTPS requests to Django
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+
+# Configure the Postgres database
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Logging
 LOGGING = {
@@ -27,3 +32,4 @@ LOGGING = {
         },
     },
 }
+
