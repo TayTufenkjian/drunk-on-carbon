@@ -63,7 +63,7 @@ def create_account(request):
             })
         except:
             log = logging.getLogger(__name__)
-            log.error()
+            logging.exception("The detailed error message -")
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
 
