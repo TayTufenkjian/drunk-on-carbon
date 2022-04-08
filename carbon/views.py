@@ -1,8 +1,8 @@
-import json
 import logging
 import math
 import requests
 import urllib.parse
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
