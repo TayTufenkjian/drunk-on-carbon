@@ -1,4 +1,5 @@
 import json
+import logging
 import math
 import requests
 import urllib.parse
@@ -60,6 +61,9 @@ def create_account(request):
             return render(request, "create_account.html", {
                 "message": "This username is not available. Please enter a different username and try again."
             })
+        except:
+            log = logging.getLogger(__name__)
+            log.error()
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
 
