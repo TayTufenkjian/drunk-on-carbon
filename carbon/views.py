@@ -57,6 +57,7 @@ def create_account(request):
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
+            login(request, user)
         except IntegrityError:
             return render(request, "create_account.html", {
                 "message": "This username is not available. Please enter a different username and try again."
@@ -64,7 +65,7 @@ def create_account(request):
         except:
             log = logging.getLogger(__name__)
             logging.exception("The detailed error message -")
-        login(request, user)
+      
         return HttpResponseRedirect(reverse("index"))
 
     # If request is GET, load the page for creating a user account
