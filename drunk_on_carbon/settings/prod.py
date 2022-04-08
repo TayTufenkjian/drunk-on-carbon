@@ -31,3 +31,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+
+# Settings to avoid transmitting sensitive cookies over HTTP accidentally
+# For these settings to work, the web server must redirect all HTTP traffic to HTTPS, and only transmit HTTPS requests to Django
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
