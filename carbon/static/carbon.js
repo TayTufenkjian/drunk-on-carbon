@@ -109,19 +109,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Select all saved estimates
         saved_estimates = document.querySelectorAll('.saved-estimate');
 
-        // Listen for a hover(mouseover) on the saved estimates
+        // Listen for a hover(mouseover) on the saved estimates if user is not on a mobile device
         saved_estimates.forEach(item => {
-            item.addEventListener('mouseover', event => {
-                // Show the delete button for that saved estimate
-                delete_button = item.querySelector('button');
-                delete_button.style.display = 'block';
 
-            })
-            item.addEventListener('mouseout', event => {
-                // Hide the delete button
-                delete_button.style.display = 'none';
-            })
-        })
+            if (!is_mobile()) {
+                item.addEventListener('mouseover', event => {
+                    // Show the delete button for that saved estimate
+                    delete_button = item.querySelector('button');
+                    delete_button.style.display = 'block';
+
+                })
+                item.addEventListener('mouseout', event => {
+                    // Hide the delete button
+                    delete_button.style.display = 'none';
+                })
+            }
+        });
 
         // Listen for a click on the saved estimates
         saved_estimates.forEach(item => {
@@ -264,6 +267,10 @@ function show_save_link(params) {
     document.querySelector('.btn').disabled = false;
 }
 
+
+function is_mobile() {
+    return navigator.userAgent.toLowerCase().match(/mobile/i)
+}
 
 // Get the CSRF token
 // Copied and pasted from the Django documentation https://docs.djangoproject.com/en/4.0/ref/csrf/
