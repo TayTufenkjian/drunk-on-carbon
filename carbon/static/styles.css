@@ -20,7 +20,6 @@
     animation-iteration-count: 1;
     animation-fill-mode: forwards;   
 }
-
 /* END Animation  */
 
 /* START Sticky Footer Styles */
@@ -126,10 +125,12 @@ h2 {
     border-bottom: 1px solid #d6d8db;
 }
 
-.saved-estimate:hover {
-    background-color: #cee2fd;
-}
-
 .travel-modes h4 {
     padding-left: 19px;
 }
+
+@media (min-width: 768px) { 
+    .saved-estimate:hover {
+        background-color: #E9ECEF;
+    }    
+ }
