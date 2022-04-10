@@ -13,10 +13,10 @@ Why wine bottles? Carbon dioxide equivalents (CO<sub>2</sub>e) are typically mea
 
 I used Django and Javascript because that was a requirement for the final project. Additionally, Python and Javascript are the two languages I'm most familiar with.
 
-To keep the scope manageable, I limited the project to estimate CO<sub>2</sub>e for travel in the United States by car, rail, and air. There are many more activities and regions for which you could estimate CO2e.
+To keep the scope manageable, I limited the project to estimate CO<sub>2</sub>e for travel in the United States by car, rail, and air. There are many more activities and regions for which you could estimate CO<sub>2</sub>e.
 
 ### What can you do with this app?
-* Get CO2e estimates for different travel methods for trips in the United States
+* Get CO<sub>2</sub>e estimates for different travel methods for trips in the United States
 * Create a user account
 * Save estimates
 * Delete saved estimates
@@ -52,9 +52,9 @@ To set up your own version of the app, you would need one API key from Climatiq 
 ## How the app uses those APIs to calculate estimates
 Climatiq allows us to access a database of up-to-date and scientifically vetted emission factors.
 
-We uses Climatiq to get emission factors such as the kg of CO<sub>2</sub>e generated when one person travels one mile by car in the United States.
+We use Climatiq to get emission factors such as the kg of CO<sub>2</sub>e generated when one person travels one mile by car in the United States.
 
-The user can enter either a number of miles OR an origin and estination.
+The user can enter either a number of miles OR an origin and destination.
 
 If the user enters a number of miles, we multiply that number of miles by the emission factor provided by Climatiq. Then we display the number of wine bottles to make that estimate more visual.
 
@@ -64,7 +64,7 @@ That's where the Google Maps APIs come in.
 
 We pass the origin and destination submitted by the user to the Places API, which returns unique Google Place IDs that match those user submissions.
 
-Then we pass those Place IDs to the Distance Matrix API, which returns the number of meters in between the two places. We convert the meters to miles. Then we're can calculate the CO<sub>2</sub>e estimates based on the emission factors provided by Climatiq.
+Then we pass those Place IDs to the Distance Matrix API, which returns the number of meters between the two places. We convert the meters to miles. Then we can calculate the CO<sub>2</sub>e estimates based on the emission factors provided by Climatiq.
 
 ## Distinctiveness and Complexity
 (This section only applies to the CS50 web programming course.)
