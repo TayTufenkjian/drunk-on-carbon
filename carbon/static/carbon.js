@@ -143,7 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {  // Show the details for the saved estimate
 
                     // Hide all the saved estimates
-                    document.querySelector('#saved-estimates').style.display = 'none';
+                    saved_estimates = document.querySelector('#saved-estimates');
+                    saved_estimates.style.display = 'none';
 
                     // Show loading spinner
                     document.querySelector('#loading').style.display = 'block';
@@ -160,6 +161,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Display the relevant estimate with wine bottles
                         show_estimates(saved_estimate.miles);
 
+                        // Display the delete button
+                        delete_button = document.querySelector('#options .delete');
+                        delete_button.style.display = 'block';
+
+                        // Listen for a click on the delete button
+                        delete_button.addEventListener('click', event => {
+                            
+                            fetch(`delete/${id}`)  // Delete the saved estimate
+                            .then(() => {
+                                window.location.reload();  // Then reload the saved estimates page
+                            })  
+                            
+                        })
                     })
                 }
             })

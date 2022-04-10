@@ -104,7 +104,7 @@ h2 {
     margin-bottom: 1rem;
 }
 
-#options a[class="btn btn-success"] {
+#options a[class="btn btn-success"], #options button {
     float: right;
     position: relative;
     z-index: 999;
