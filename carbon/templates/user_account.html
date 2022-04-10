@@ -28,7 +28,7 @@
     </form>
 
     {% if message %}
-        <div>{{ message }}</div>
+        <div class="{{ message_type }}">{{ message }}</div>
     {% endif %}
 
 {% endblock %}

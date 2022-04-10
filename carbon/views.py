@@ -50,6 +50,7 @@ def create_account(request):
         confirmation = request.POST["confirmation"]
         if password != confirmation:
             return render(request, "create_account.html", {
+                "message_type": "text-danger",
                 "message": "Passwords must match. Please check your password and confirmation password, then try again."
             })
 
@@ -60,6 +61,7 @@ def create_account(request):
             login(request, user)
         except IntegrityError:
             return render(request, "create_account.html", {
+                "message_type": "text-danger",
                 "message": "This username is not available. Please enter a different username and try again."
             })
         except:
@@ -89,6 +91,7 @@ def login_view(request):
             return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "login.html", {
+                "message_type": "text-danger",
                 "message": "Invalid username and/or password."
             })
 
@@ -133,17 +136,23 @@ def change_password(request):
                 login(request, user)
 
                 # Display success message
+                message_type = "text-success"
                 message = "Your password has been changed successfully!"
 
             else:
                 # Display error mesage about the new password confirmation
+                message_type = "text-danger"
                 message = "New password and new password confirmation do not match."
 
         else:
             # Display error message about current password
+            message_type = "text-danger"
             message = "The current password you entered does not match your existing password."
         
-        return render(request, "user_account.html", {"message": message})
+        return render(request, "user_account.html", { 
+            "message_type": message_type,
+            "message": message
+        })
 
 
 def estimate(request, miles):

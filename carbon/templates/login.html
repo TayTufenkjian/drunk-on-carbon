@@ -5,7 +5,7 @@
     <h2>Log in</h2>
 
     {% if message %}
-        <div>{{ message }}</div>
+        <div class="{{ message_type }}">{{ message }}</div>
     {% endif %}
 
     <form action="{% url 'login' %}" method="post" class="one-col">
