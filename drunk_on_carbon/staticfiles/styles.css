@@ -48,11 +48,6 @@ button.delete {
     z-index: 10;
 }
 
-.layout-container {
-    margin-top: 3rem;
-    max-width: 960px;
-}
-
 #estimate-description {
     margin: 2rem 0;
 }
@@ -87,8 +82,9 @@ h2 {
     margin: 1rem auto;
 }
 
-#inputs h3 {
-    color: #198754;
+.layout-container {
+    margin-top: 2rem;
+    max-width: 960px;
 }
 
 #loading {
@@ -98,10 +94,6 @@ h2 {
 .navbar-brand, .navbar-brand:hover {
     color: #212529;
     text-decoration: none;
-}
-
-#options {
-    margin-bottom: 1rem;
 }
 
 #options a[class="btn btn-success"], #options button {
@@ -132,5 +124,27 @@ h2 {
 @media (min-width: 768px) { 
     .saved-estimate:hover {
         background-color: #E9ECEF;
+    }    
+ }
+
+/* Mobile styles for the estimate travel modes and wine bottles */
+ @media (max-width: 768px) { 
+    #estimate-container h3 {
+        font-size: 20px;
+    }
+    #estimate-container h4 {
+        font-size: 14px;
+    }
+    #estimate-container div {
+        font-size: 12px;
+    }
+    #estimate-container img {
+        width: 28px;
+    }
+    #options a[class="btn btn-success"], #options button {
+       font-size: 12px;
+    }
+    .travel-modes h4 {
+        padding-left: 0;
     }    
  }
