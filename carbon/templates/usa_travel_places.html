@@ -9,7 +9,7 @@
             <h3>From</h3>
             <div class="col">
                 <label for="origin_city" class="form-label">City</label>
-                <input type="text" class="form-control" name="origin_city" id="origin_city" required>
+                <input type="text" class="form-control" name="origin_city" id="origin_city"  pattern="^[\w\-\s]+$"  title="Letters, numbers, and spaces only" required>
             </div>
             <div class="col">
                 <label for="origin_state" class="form-label">State</label>
@@ -22,7 +22,7 @@
             <h3>To</h3>
             <div class="col">
                 <label for="destination_city" class="form-label">City</label>
-                <input type="text" class="form-control" name="destination_city" id="destination_city" required>
+                <input type="text" class="form-control" name="destination_city" id="destination_city" pattern="^[\w\-\s]+$"  title="Letters, numbers, and spaces only" required>
             </div>
             <div class="col">
                 <label for="destination_state" class="form-label">State</label>
