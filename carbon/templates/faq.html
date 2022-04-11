@@ -29,10 +29,10 @@
               <p>Carbon dioxide equivalent is the standard measurement of greenhouse gas emissions in terms of the most common greenhouse gas, which is carbon dioxide (CO<sub>2</sub>).</p>
               <p>Different greenhouse gases have different heat-trappping abilities and different atmospheric lifetimes. So they contribute to global warming in different ways and on different scales.</p>
               <p>For example, one tonne of carbon dioxide causes a different amount of warming than one tonne of methane over the same time period.</p>
-              <p>It would be cumbersome if we had to list separate measurements for every single greenhouse gas any time we discuss global warming and greenhouse gas emissions.</p>
+              <p>It would be cumbersome if we had to list separate measurements for every single greenhouse gas any time we discuss the emissions that contribute to global warming.</p>
               <p>So we use carbon dioxide as the common denominator, a benchmark to which we can compare the effects of other greenhouse gases.</p>
               <p>For example, to determine the carbon dioxide equivalent of methane, we take the amount of warming that a unit mass of methane would generate over 100 years, then figure out the unit mass of carbon dioxide that would generate the same amount of warming over 100 years.</p>
-              <p>Fortunately, the Intergovernmental Panel on Climate Change (IPCC) has already figured this out, so we know that releasing 1 kg of methane is equivalent to releasing 25 kg of carbon dioxide.</p>
+              <p>Fortunately, the Intergovernmental Panel on Climate Change (IPCC) has already done this research, so we know that releasing 1 kg of methane is equivalent to releasing 25 kg of carbon dioxide.</p>
               <p><a href="https://youtu.be/-G-wuSbe-sE">This video</a> from the University of Queensland uses currency conversion as a helpful analogy. We convert the global warming potential of methane to a carbon dioxide equivalent the same way we might convert the value of euros to dollars.</p>
             </div>
           </div>
@@ -45,12 +45,13 @@
           </h2>
           <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <p>An emission factor is a value that estimates the quantity of a gas with a global warming potential (GWP) released into the atmosphere, per some unit related to a particular activity.</p>
+              <p>Per <a href="https://www.climatiq.io/docs" target="blank">Climatiq</a>, an emission factor is a value that estimates the quantity of a gas with a global warming potential (GWP) released into the atmosphere, per some unit related to a particular activity.</p>
               <p>For example, one emission factor we use is:
                 <br><code>passenger_vehicle-vehicle_type_car-fuel_source_na-engine_size_na-vehicle_age_na-vehicle_weight_na</code>
               </p>
               <p>This is the emission intensity of a passenger car (any vehicle with a wheelbase less than 121 inches, which includes passenger cars/minivans/SUVs/small pickup trucks).</p>
               <p>For every mile driven, 0.343372 kg of CO<sub>2</sub>e is emitted.</p>
+              <p>You can explore other emission factors <a href="https://www.climatiq.io/explorer" target="blank">here.</a></p>
             </div>
           </div>
         </div>
@@ -63,10 +64,11 @@
           <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <p>We use the <a href="https://www.climatiq.io/docs" target="blank">Climatiq API</a>, which allows us to access a database of up-to-date and scientifically vetted emission factors.</p>
-                <p>When you enter a number of miles, we send that number to Climatiq. Climatiq sends back the kg of CO<sub>2</sub>e emitted by traveling that distance.</p>
+                <p>Climatiq provides emission factors such as the kg of CO<sub>2</sub>e generated when one person travels one mile by car in the United States.</p>               
+                <p>When you enter a number of miles, we multiply that value by the CO<sub>2</sub>e kg value provided by Climatiq.</p>
                 <p>When you enter an origin and destination, we use the <a href="https://developers.google.com/maps/documentation/places/web-service" target="blank">Google Maps Places API</a> and the <a href="https://developers.google.com/maps/documentation/distance-matrix" target="blank">Google Maps Distance Matrix API</a> to calculate the distance between them.</p>
                 <p>Google sends back the distance between those two places in meters.</p>
-                <p>We convert the meters to miles, then send that value to the Climatiq API.</p>
+                <p>We convert the meters to miles, then multiply that value by the CO<sub>2</sub>e kg provided by Climatiq.</p>
                 <p>For more detail, you can view the code <a href="https://github.com/TayTufenkjian/drunk-on-carbon" target="blank">here on GitHub.</a></p>
             </div>
           </div>
