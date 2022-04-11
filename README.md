@@ -5,7 +5,7 @@ Drunk on Carbon is a project that visualizes carbon dioxide equivalents as bottl
 
 Why wine bottles? Carbon dioxide equivalents (CO<sub>2</sub>e) are typically measured in kilograms(kg), and one bottle of wine weighs about one kilogram.
 
-### My goals for this project
+### Goals for this project
 * Visualize some of the impacts of climate change, which often seems too big to comprehend.
 * Practice building a web app with Django and Javascript.
 * Learn how to integrate with multiple APIs.
@@ -78,9 +78,9 @@ python
 >>> print(utils.get_random_secret_key())
 ```
 
-To obtain a `CLIMATIQ_API_KEY` and a `GOOGLE_MAPS_API_KEY`, see the links to the documentation in the Third-Party APIs section below.
+To obtain a `CLIMATIQ_API_KEY` and a `GOOGLE_MAPS_API_KEY`, see the links to the documentation in the [Third-Party APIs](#third-party-apis) section below.
 
-After obtaining your keys and configuring your .env file, you can run the application locally with:
+After obtaining your keys and configuring your `.env` file, you can run the application locally with:
 
 ```
 python manage.py runserver
