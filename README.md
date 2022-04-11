@@ -49,6 +49,7 @@ The app uses three third-party APIs:
 
 To set up your own version of the app, you would need one API key from Climatiq and one API key from Google Maps (the same key works for both Google Maps APIs). The documentation at the links above has instructions for how to obtain these keys.
 
+
 ## How the app uses those APIs to calculate estimates
 Climatiq allows us to access a database of up-to-date and scientifically vetted emission factors.
 
@@ -65,6 +66,38 @@ That's where the Google Maps APIs come in.
 We pass the origin and destination submitted by the user to the Places API, which returns unique Google Place IDs that match those user submissions.
 
 Then we pass those Place IDs to the Distance Matrix API, which returns the number of meters between the two places. We convert the meters to miles. Then we can calculate the CO<sub>2</sub>e estimates based on the emission factors provided by Climatiq.
+
+
+## File Contents
+
+### carbon/views.py
+This file contains all the Python functions required to:
+* load each web page 
+* generate CO<sub>2</sub>e estimates by accepting user input, calling third-party APIs, parsing the API responses, running the calculation, and returning the results as JSON
+* create a user account, log in, log out, and change password
+* save estimates and delete saved estimates
+
+### carbon/urls.py
+This file contains the URL patterns that call the views and that allow JavaScript to interact with the Python functions via the Fetch API.
+
+### carbon/models.py
+This file contains two models: User and SavedEstimate. The approach here was to store as little data as possible. Submitting an estimate can be handled entirely programatically by calling the third-party APIs; only when the user wants to save an estimate do we need to store any data.
+
+### carbon/static/carbon.js
+This file handles AJAX requests and the behavior of page elements in the browser. None of the HTML forms are ever actually submitted. When the form submit button is clicked, the click triggers AJAX requests via the Fetch API that call Python functions to calculate the estimate and update the page content. The display of the estimates for different travel modes and the corresponding wine bottles are dynamically generated without reloading the page.
+
+### carbon/static/styles.css
+Most of the styles come from Bootstrap. This file overrides some of those styles as needed. It also contains some simple animation for smoother page loads.
+
+### drunk_on_carbon/settings/base.py
+Instead of having one settings file for the entire project, there are several settings files that allow for different environment configurations. This base file stores the settings that are common to development and production. The dev and prod settings files import this base file and build upon it.
+
+### drunk_on_carbon/settings/dev.py
+This file imports the base settings and adds additional settings that apply only to the development environment.
+
+### drunk_on_carbon/settings/prod.py
+This file imports the base settings and adds additional settings that apply only to the production environment.
+
 
 ## Distinctiveness and Complexity
 (This section only applies to the CS50 web programming course.)
