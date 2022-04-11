@@ -21,10 +21,14 @@ To keep the scope manageable, I limited the project to estimate CO<sub>2</sub>e 
 * Save estimates
 * Delete saved estimates
 
+<hr>
 
 ## Demo
-The code in this repo is deployed on Heroku: https://drunk-on-carbon.herokuapp.com/
+This application is deployed on Heroku: 
 
+https://drunk-on-carbon.herokuapp.com/
+
+<hr>
 
 ## Technologies
 The requirements.txt file has the complete list of packages and libraries, but here are the highlights:
@@ -40,6 +44,49 @@ Some requirements are specifically for deploying on Heroku:
 * Psycopg2-binary 2.9.3 (PostgreSQL driver for Python)
 * Whitenoise 6.0.0 (serves Django static files in production)
 
+<hr>
+
+## Set up and run the application
+First, install the required packages listed in the requirements.txt file.
+<br>Using pip, you can do this in the terminal by running:
+
+<code>pip install -r requirements.txt</code>
+
+You'll also need to create a .env file in the project directory (at the same level as the manage.py file).
+<br>The .env file should contain values for the Django secret key as well as two API keys.
+<br>These values are sensitive (which is why they're in an environment file that is not on GitHub), so don't share them.
+
+Example of the .env file contents:
+
+<code>
+
+DEV_SECRET_KEY = 'yourDjangoSecretKey123goeshere'
+
+CLIMATIQ_API_KEY = 'yourClimatiqAPIKey456goeshere'
+
+GOOGLE_MAPS_API_KEY = 'yourGoogleMapsAPIKey789goeshere'
+
+</code>
+
+The DEV_SECRET_KEY is the secret key Django uses to provide cryptographic signing.
+<br>It should be set to a unique, unpredictable value.
+<br>To generate a secret key, you can enter the following in your terminal:
+
+<code>
+
+python
+<br>>>> from django.core.management import utils
+<br>>>> print(utils.get_random_secret_key())
+
+</code>
+
+For the CLIMATIQ_API_KEY and the GOOGLE_MAPS_API_KEY, see the links to the documentation in the Third-Party APIs section below.
+
+After obtaining your keys and configuring your .env file, you can run the application locally with:
+
+<code>python manage.py runserver</code>
+
+<hr>
 
 ## Third-Party APIs
 The app uses three third-party APIs:
@@ -49,6 +96,7 @@ The app uses three third-party APIs:
 
 To set up your own version of the app, you would need one API key from Climatiq and one API key from Google Maps (the same key works for both Google Maps APIs). The documentation at the links above has instructions for how to obtain these keys.
 
+<hr>
 
 ## How the app uses those APIs to calculate estimates
 Climatiq allows us to access a database of up-to-date and scientifically vetted emission factors.
@@ -67,6 +115,7 @@ We pass the origin and destination submitted by the user to the Places API, whic
 
 Then we pass those Place IDs to the Distance Matrix API, which returns the number of meters between the two places. We convert the meters to miles. Then we can calculate the CO<sub>2</sub>e estimates based on the emission factors provided by Climatiq.
 
+<hr>
 
 ## File Contents
 
@@ -98,6 +147,7 @@ This file imports the base settings and adds additional settings that apply only
 ### drunk_on_carbon/settings/prod.py
 This file imports the base settings and adds additional settings that apply only to the production environment.
 
+<hr>
 
 ## Distinctiveness and Complexity
 (This section only applies to the CS50 web programming course.)
