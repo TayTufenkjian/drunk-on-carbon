@@ -146,13 +146,3 @@ This Python file imports the base settings and adds settings that only apply to 
 
 ### `drunk_on_carbon/settings/prod.py`
 This Python file imports the base settings and adds settings that only apply to the production environment.
-
-<hr>
-
-## Distinctiveness and Complexity
-(This section only applies to the CS50 web programming course.)
-
-This project satisfies the distinctiveness and complexity requirements in three ways:
-1. **The concept bears no resemblance to the earlier course projects.** This project is decidedly NOT a wiki, ecommerce, email, or social network application. The only similarity really is that it allows the user to create an account, log in, and save certain elements; however, this type of general functionality is found in most web apps.
-2. **The project uses multiple third-party APIs.** Integrating those web services involved obtaining API keys, scouring the documentation about each web service, parsing the responses, and troubleshooting the API calls with Postman.
-3. **The project is [deployed on Heroku](https://drunk-on-carbon.herokuapp.com/).** To the surprise of absolutely no one, getting the application to work on my local was one thing; getting it to work on a live production server was another. This involved configuring different settings for different environments, installing additional packages just for the Heroku configuration, and figuring out how to serve static files in production (which is not something Django handles out of the box, interestingly enough). Hopefully this makes the grading process easier though! :blush:
