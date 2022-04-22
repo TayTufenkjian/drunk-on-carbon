@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.estimate-form') !== null)
     {
         // Select the estimate form 
-        estimate_form = document.querySelector('.estimate-form');
+        let estimate_form = document.querySelector('.estimate-form');
 
         // Listen for the submission of the estimate forms
         estimate_form.onsubmit = () => {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (document.querySelector('#miles') !== null)
             {
                 // Get and display the miles used to calculate the estimates
-                miles = document.querySelector('#miles').value;
+                let miles = document.querySelector('#miles').value;
                 show_inputs(miles);
                 
                 // Display the relevant estimates
@@ -42,13 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             } else {
                 // If using the advanced form, request the distance from Google Maps
-                origin_city = document.querySelector('#origin_city').value;
-                origin_state = document.querySelector('#origin_state').value;
-                destination_city = document.querySelector('#destination_city').value;
-                destination_state = document.querySelector('#destination_state').value;
+                let origin_city = document.querySelector('#origin_city').value;
+                let origin_state = document.querySelector('#origin_state').value;
+                let destination_city = document.querySelector('#destination_city').value;
+                let destination_state = document.querySelector('#destination_state').value;
 
-                origin = `${origin_city}, ${origin_state}`;
-                destination = `${destination_city}, ${destination_state}`;
+                let origin = `${origin_city}, ${origin_state}`;
+                let destination = `${destination_city}, ${destination_state}`;
                 
 
                 fetch(`/request_distance/${origin}&${destination}`, {
@@ -63,11 +63,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (data.error) {
                         console.log(data.error);
 
-                        message = document.createElement('div');
+                        let message = document.createElement('div');
                         message.classList = ('mb-4');
                         message.innerHTML = data.message;
 
-                        action = document.createElement('button');
+                        let action = document.createElement('button');
                         action.classList = ('btn btn-primary');
                         action.innerHTML = 'Try again';
                         action.onclick = (function() {window.location.reload()});
@@ -79,9 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     } else {
                         // Get miles and formatted addresses
-                        miles = data.miles;
-                        origin_formatted = data.origin_address;
-                        destination_formatted = data.destination_address;
+                        let miles = data.miles;
+                        let origin_formatted = data.origin_address;
+                        let destination_formatted = data.destination_address;
 
                         // Display the miles, origin, and destination used to calculate the estimates
                         show_inputs(miles, origin_formatted, destination_formatted);
@@ -107,15 +107,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.saved-estimate') !== null)
     {   
         // Select all saved estimates
-        saved_estimates = document.querySelectorAll('.saved-estimate');
+        let saved_estimates = document.querySelectorAll('.saved-estimate');
 
         // Listen for a hover(mouseover) on the saved estimates if user is not on a mobile device
         saved_estimates.forEach(item => {
 
             if (!is_mobile()) {
+                let delete_button = item.querySelector('button');
                 item.addEventListener('mouseover', event => {
-                    // Show the delete button for that saved estimate
-                    delete_button = item.querySelector('button');
+                    // Show the delete button for that saved estimate       
                     delete_button.style.display = 'block';
 
                 })
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // If the delete button was clicked, delete the saved estimate
                 if (target.classList.contains('delete'))
                 {
-                    id = item.id;
+                    let id = item.id;
                     fetch(`delete/${id}`)
                     .then(item.remove())
                     
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.querySelector('#loading').style.display = 'block';
 
                     // Get saved estimate data
-                    id = item.id;
+                    let id = item.id;
                     fetch(`load/${id}`)
                     .then(response => response.json())
                     .then(saved_estimate => {
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         show_estimates(saved_estimate.miles);
 
                         // Display the delete button
-                        delete_button = document.querySelector('#options .delete');
+                        let delete_button = document.querySelector('#options .delete');
                         delete_button.style.display = 'block';
 
                         // Listen for a click on the delete button
@@ -185,18 +185,18 @@ document.addEventListener('DOMContentLoaded', function() {
 function show_inputs(miles, origin_address='', destination_address='') {
 
     // Select the div that will contain the inputs
-    inputs_div = document.querySelector('#inputs'); 
+    let inputs_div = document.querySelector('#inputs'); 
 
     // Create and populate the miles header
-    miles_header = document.createElement('h3');
+    let miles_header = document.createElement('h3');
     miles_header.innerHTML = `${miles} miles`;
 
     // Create and populate the "from" section
-    from = document.createElement('div');
+    let from = document.createElement('div');
     from.innerHTML = `from: ${origin_address}`;
 
     // Create and populate the "to" section
-    to = document.createElement('div');
+    let to = document.createElement('div');
     to.innerHTML = `to: ${destination_address}`;
 
     // Populate the inputs section depending on the inputs submitted
@@ -218,21 +218,21 @@ function show_estimates(miles) {
     .then(estimates => {
 
         // For each mode of travel, get the object containing kg estimate and wine bottle images
-        car = wine_bottles('Car', estimates.car);
-        rail = wine_bottles('Rail', estimates.rail);
-        air = wine_bottles('Air', estimates.air);
+        let car = wine_bottles('Car', estimates.car);
+        let rail = wine_bottles('Rail', estimates.rail);
+        let air = wine_bottles('Air', estimates.air);
 
         // Show description 
-        description = document.createElement('h4');
+        let description = document.createElement('h4');
         description.innerHTML = 'CO<sub>2</sub>e emitted when traveling by...';
         document.querySelector('#estimate-description').append(description);
 
         // Update the page to display all estimates
-        travel_modes = document.createElement('div');
+        let travel_modes = document.createElement('div');
         travel_modes.classList.add('travel-modes', 'row');
         travel_modes.append(car.text, rail.text, air.text);
 
-        all_bottles = document.createElement('div');
+        let all_bottles = document.createElement('div');
         all_bottles.classList.add('all-bottles', 'row');
         all_bottles.append(car.bottles, rail.bottles, air.bottles);
 
@@ -271,7 +271,7 @@ function wine_bottles(travel_mode, kg) {
 function show_save_link(params) {
 
     // Create and display the link to save an estimate
-    save_estimate = document.createElement('a');
+    let save_estimate = document.createElement('a');
     save_estimate.classList = 'btn btn-success';
     save_estimate.innerHTML = 'Save this estimate';
     save_estimate.href = `/save_estimate/${params}`;
