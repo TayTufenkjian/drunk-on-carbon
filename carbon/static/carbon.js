@@ -65,11 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         let message = document.createElement('div');
                         message.classList = ('mb-4');
-                        message.innerHTML = data.message;
+                        message.textContent = data.message;
 
                         let action = document.createElement('button');
                         action.classList = ('btn btn-primary');
-                        action.innerHTML = 'Try again';
+                        action.textContent = 'Try again';
                         action.onclick = (function() {window.location.reload()});
 
                         document.querySelector('#estimates').append(message, action);     
@@ -189,15 +189,15 @@ function show_inputs(miles, origin_address='', destination_address='') {
 
     // Create and populate the miles header
     let miles_header = document.createElement('h3');
-    miles_header.innerHTML = `${miles} miles`;
+    miles_header.textContent = `${miles} miles`;
 
     // Create and populate the "from" section
     let from = document.createElement('div');
-    from.innerHTML = `from: ${origin_address}`;
+    from.textContent = `from: ${origin_address}`;
 
     // Create and populate the "to" section
     let to = document.createElement('div');
-    to.innerHTML = `to: ${destination_address}`;
+    to.textContent = `to: ${destination_address}`;
 
     // Populate the inputs section depending on the inputs submitted
     if (origin_address == '')
@@ -261,7 +261,10 @@ function wine_bottles(travel_mode, kg) {
     let text = document.createElement('div');
     text.id = `${travel_mode}`;
     text.classList.add('col');
-    text.innerHTML = `<h4>${travel_mode} - ${kg} kg</h4>`;
+
+    let header = document.createElement('h4')
+    header.textContent = `${travel_mode} - ${kg} kg`;
+    text.appendChild(header);
 
     // Return an object containing the estimate text and bottle images
     return {'text': text, 'bottles': bottles};
@@ -273,7 +276,7 @@ function show_save_link(params) {
     // Create and display the link to save an estimate
     let save_estimate = document.createElement('a');
     save_estimate.classList = 'btn btn-success';
-    save_estimate.innerHTML = 'Save this estimate';
+    save_estimate.textContent = 'Save this estimate';
     save_estimate.href = `/save_estimate/${params}`;
     document.querySelector('#options').append(save_estimate);
 
