@@ -51,14 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 let destination = `${destination_city}, ${destination_state}`;
                 
 
-                fetch(`/request_distance/${origin}&${destination}`, {
-                    method: 'POST',
-                    headers: {'X-CSRFToken': csrftoken},
-                    mode: 'same-origin'
-                })
+                fetch(`/request_distance/${origin}&${destination}`)
                 .then(response => response.json())
                 .then(data => {
-
                     // If there was an error, log the error and display the error message
                     if (data.error) {
                         console.log(data.error);
